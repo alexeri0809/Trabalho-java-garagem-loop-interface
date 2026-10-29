@@ -186,4 +186,4 @@ O projeto constitui também uma oportunidade para praticar a compilação, a exe
 **Projeto:** Trabalho Java — Garagem  
 **Linguagem:** Java  
 **Gestão do projeto:** Maven  
-**Repositório:** [Trabalho-java-garagem no GitHub](https://github.com/alexeri0809/Trabalho-java-garagem)
+**Repositório:** [Trabalho-java-garagem no GitHub](https://github.com/alexeri0809/Trabalho-java-garagem-loop-interface)
