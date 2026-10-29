@@ -1,4 +1,4 @@
-# Trabalho-java-garagem
+# Trabalho-java-garagem-loop-interface
 
 ## 📌 1. Sobre o projeto
 
@@ -22,7 +22,7 @@ Exemplo com 2 carros e 1 mota:
 === Volta 1 completa === Saiu: Carro UI-77-ND | Entrou: Carro GP-36-RD
 ```
 
-Esta funcionalidade junta este projeto com o [Trabalho-java-garagem-loop](https://github.com/alexeri0809/Trabalho-java-garagem-loop). Os detalhes estão no `Manual_Tecnico.md` (secção 3.1) e no `Manual_Utilizador.md` (secção 6).
+Esta funcionalidade junta este projeto com o [Trabalho-java-garagem-loop](https://github.com/alexeri0809/Trabalho-java-garagem-loop-interface). Os detalhes estão no `Manual_Tecnico.md` (secção 3.1) e no `Manual_Utilizador.md` (secção 6).
 
 ## 🎯 2. Objetivos do trabalho
 
@@ -40,6 +40,7 @@ Esta funcionalidade junta este projeto com o [Trabalho-java-garagem-loop](https:
 | Java | Linguagem utilizada para desenvolver o programa. |
 | Maven | Ferramenta que permite compilar o projeto e executar testes. |
 | JUnit (se configurado) | Biblioteca para criar e executar testes automatizados. |
+| JavaFX | Usado para fazer a interface do programa. |
 | Git e GitHub | Ferramentas para controlar versões e guardar o código do projeto. |
 
 ## 📂 4. Estrutura do projeto
