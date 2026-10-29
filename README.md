@@ -183,7 +183,7 @@ O projeto constitui também uma oportunidade para praticar a compilação, a exe
 
 ---
 
-**Projeto:** Trabalho Java — Garagem —   
+**Projeto:** Trabalho Java — Garagem — loop — interface
 **Linguagem:** Java  
 **Gestão do projeto:** Maven  +   JavaFX   
 **Repositório:** [Trabalho-java-garagem-loop-interface no GitHub](https://github.com/alexeri0809/Trabalho-java-garagem-loop-interface)
