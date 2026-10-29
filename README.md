@@ -187,5 +187,3 @@ O projeto constitui também uma oportunidade para praticar a compilação, a exe
 **Linguagem:** Java  
 **Gestão do projeto:** Maven  
 **Repositório:** [Trabalho-java-garagem no GitHub](https://github.com/alexeri0809/Trabalho-java-garagem)
-#   T r a b a l h o - j a v a - g a r a g e m - l o o p - i n t e r f a c e  
- 

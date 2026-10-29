@@ -1,0 +1,56 @@
+trabalho-java-garagem
+└── demo
+    │── manuais
+    │   │── Manual_Tecnico.md
+    │   └── Manual_Utilizador.md
+    │── pom.xml
+    │── src
+    │   │── main
+    │   │   │── java
+    │   │   │   └── com
+    │   │   │       └── example
+    │   │   │           │── fabrica
+    │   │   │           │   │── BarcoFactory.java
+    │   │   │           │   │── CarroFactory.java
+    │   │   │           │   │── MotaFactory.java
+    │   │   │           │   └── VeiculoFactory.java
+    │   │   │           │── facade
+    │   │   │           │   └── GaragemFacade.java
+    │   │   │           │── garagem
+    │   │   │           │   │── Garagem.java
+    │   │   │           │   │── GrupoVeiculos.java
+    │   │   │           │   └── IteradorGaragem.java
+    │   │   │           │── loop
+    │   │   │           │   │── GaragemLoop.java
+    │   │   │           │   │── ListaCircular.java
+    │   │   │           │   └── No.java
+    │   │   │           │── Main.java
+    │   │   │           │── matricula
+    │   │   │           │   │── EstrategiaMatricula.java
+    │   │   │           │   │── Matricula.java
+    │   │   │           │   │── MatriculaMaritima.java
+    │   │   │           │   └── MatriculaTerrestre.java
+    │   │   │           └── veiculo
+    │   │   │               │── Barco.java
+    │   │   │               │── Carro.java
+    │   │   │               │── ElementoGaragem.java
+    │   │   │               │── Mota.java
+    │   │   │               │── TipoVeiculo.java
+    │   │   │               └── Veiculo.java
+    │   │   └── resources
+    │   └── test
+    │       └── java
+    │           └── com
+    │               └── example
+    │                   │── fabrica
+    │                   │   └── VeiculoFactoryTest.java
+    │                   │── facade
+    │                   │   └── GaragemFacadeTest.java
+    │                   │── garagem
+    │                   │   └── GaragemTest.java
+    │                   │── loop
+    │                   │   │── GaragemLoopTest.java
+    │                   │   └── ListaCircularTest.java
+    │                   └── matricula
+    │                       │── MatriculaMaritimaTest.java
+    │                       └── MatriculaTerrestreTest.java
