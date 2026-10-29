@@ -1,56 +1,409 @@
 trabalho-java-garagem
-└── demo
-    │── manuais
-    │   │── Manual_Tecnico.md
-    │   └── Manual_Utilizador.md
-    │── pom.xml
-    │── src
-    │   │── main
-    │   │   │── java
-    │   │   │   └── com
-    │   │   │       └── example
-    │   │   │           │── fabrica
-    │   │   │           │   │── BarcoFactory.java
-    │   │   │           │   │── CarroFactory.java
-    │   │   │           │   │── MotaFactory.java
-    │   │   │           │   └── VeiculoFactory.java
-    │   │   │           │── facade
-    │   │   │           │   └── GaragemFacade.java
-    │   │   │           │── garagem
-    │   │   │           │   │── Garagem.java
-    │   │   │           │   │── GrupoVeiculos.java
-    │   │   │           │   └── IteradorGaragem.java
-    │   │   │           │── loop
-    │   │   │           │   │── GaragemLoop.java
-    │   │   │           │   │── ListaCircular.java
-    │   │   │           │   └── No.java
-    │   │   │           │── Main.java
-    │   │   │           │── matricula
-    │   │   │           │   │── EstrategiaMatricula.java
-    │   │   │           │   │── Matricula.java
-    │   │   │           │   │── MatriculaMaritima.java
-    │   │   │           │   └── MatriculaTerrestre.java
-    │   │   │           └── veiculo
-    │   │   │               │── Barco.java
-    │   │   │               │── Carro.java
-    │   │   │               │── ElementoGaragem.java
-    │   │   │               │── Mota.java
-    │   │   │               │── TipoVeiculo.java
-    │   │   │               └── Veiculo.java
-    │   │   └── resources
-    │   └── test
-    │       └── java
-    │           └── com
-    │               └── example
-    │                   │── fabrica
-    │                   │   └── VeiculoFactoryTest.java
-    │                   │── facade
-    │                   │   └── GaragemFacadeTest.java
-    │                   │── garagem
-    │                   │   └── GaragemTest.java
-    │                   │── loop
-    │                   │   │── GaragemLoopTest.java
-    │                   │   └── ListaCircularTest.java
-    │                   └── matricula
-    │                       │── MatriculaMaritimaTest.java
-    │                       └── MatriculaTerrestreTest.java
+│── .git
+│   │── COMMIT_EDITMSG
+│   │── config
+│   │── description
+│   │── HEAD
+│   │── hooks
+│   │   │── applypatch-msg.sample
+│   │   │── commit-msg.sample
+│   │   │── fsmonitor-watchman.sample
+│   │   │── post-update.sample
+│   │   │── pre-applypatch.sample
+│   │   │── pre-commit.sample
+│   │   │── pre-merge-commit.sample
+│   │   │── pre-push.sample
+│   │   │── pre-rebase.sample
+│   │   │── pre-receive.sample
+│   │   │── prepare-commit-msg.sample
+│   │   │── push-to-checkout.sample
+│   │   │── sendemail-validate.sample
+│   │   └── update.sample
+│   │── index
+│   │── info
+│   │   └── exclude
+│   │── logs
+│   │   │── HEAD
+│   │   └── refs
+│   │       │── heads
+│   │       │   └── main
+│   │       └── remotes
+│   │           └── origin
+│   │               └── main
+│   │── objects
+│   │   │── 00
+│   │   │   └── 4d1ae7bd6832cabd68f02b85d0c9123c76e276
+│   │   │── 01
+│   │   │   └── 8fc3435a57a3496ac1489bb1b02113076dd9cc
+│   │   │── 03
+│   │   │   └── f8ef1634c4ec941e4a2c07fffa1e435bea3cf6
+│   │   │── 05
+│   │   │   └── de657447814826162a4d83ffdd83b29b4bd1b9
+│   │   │── 07
+│   │   │   └── 02771e9702a459845dc39a2abbb57a16d8d1d2
+│   │   │── 0b
+│   │   │   └── da6809e32b200ba9fd2f952f116e0adf29b937
+│   │   │── 0e
+│   │   │   │── 172ff09a10ef2c92735070a8e2368dde163b9b
+│   │   │   │── 1cd8329f2b0c8f6b9406bf5a3fd92c3f63de79
+│   │   │   │── 49353b642c228acae20202cf38367ab00a90c7
+│   │   │   └── 608e4e4acbc59d8d21ca5e32b82806e1881875
+│   │   │── 0f
+│   │   │   └── 90f5675ea256cb1cdb1432097c24d23e00d10c
+│   │   │── 10
+│   │   │   └── a5b226a6d14e18aa0c16bbb3590dcb1862b8a4
+│   │   │── 13
+│   │   │   │── 1b5e8928f46447c49632ba8172fef10aec740a
+│   │   │   │── 3e2049193b500d3758eb19c5a4f155b765de52
+│   │   │   └── cf42cbfeaafa5212686a64792dd248eaf763fe
+│   │   │── 14
+│   │   │   └── 119c1ff752b20777313a7625b6d5682a977e15
+│   │   │── 17
+│   │   │   └── 951801a96ee266b70e79e2ae28b467bc83ab86
+│   │   │── 1a
+│   │   │   │── 14c26e1d54ab9d0df4b057e99b1b765d297778
+│   │   │   └── 185ff2d23a9a629faaced7fd05dc6eff67a260
+│   │   │── 1e
+│   │   │   └── a22326471cfb9afd04249012af305700fc6344
+│   │   │── 1f
+│   │   │   └── c9e345148e841b2bfb1865905c4461f6660148
+│   │   │── 21
+│   │   │   └── c108ab6b128e6aa6407758b566ed171e030bd5
+│   │   │── 23
+│   │   │   └── cae899aa9174fe1345a346307d88dc7698fff4
+│   │   │── 25
+│   │   │   └── 9165ffb0c4116058b457ba03d438b3e2378e5b
+│   │   │── 26
+│   │   │   │── 6cbeb9d0106bac46fead7d17b7e6c16b2568e1
+│   │   │   └── 7c84e7c5b9760ee95f4a136f778a8204c8a775
+│   │   │── 2d
+│   │   │   │── a541037feb9eaf40aca2c63feb6bd3fff6b78a
+│   │   │   │── c3f9c93c2362117be7f92cc642708d07ace025
+│   │   │   └── e547c423c280b7aa5538485a05549b36a83fcb
+│   │   │── 2f
+│   │   │   └── c49ea3a9ca6b0caf3f4feeee03abeeaabc8882
+│   │   │── 32
+│   │   │   └── 6c2119ab829c5a94b814493825963401523467
+│   │   │── 33
+│   │   │   └── 8ef22d7b6b710470eb3d7c77cae38d61b4e7c7
+│   │   │── 3c
+│   │   │   └── 30f0f39f185aa7408e331130ed927f53c32974
+│   │   │── 3f
+│   │   │   └── ed0172c1d448898be448d505dbd42cf449674e
+│   │   │── 41
+│   │   │   └── eaf6e785f122a8d55b7e592ccb9ed88fa6bd5b
+│   │   │── 42
+│   │   │   └── edf9b9dfc96ff2c50e96ff4cb459a6913b731e
+│   │   │── 45
+│   │   │   └── acc66817779deef23172010bee6620f89c6a5f
+│   │   │── 4a
+│   │   │   └── 3aaab16a0fb2e5ee2f34c390a4ebb73167480b
+│   │   │── 4b
+│   │   │   └── b51173daadd4cc4d8ad649c73f5de6d4234afe
+│   │   │── 50
+│   │   │   │── 0b776ef1b3a229aaf2728af9a7c381587f14e5
+│   │   │   └── bb4ffae58bc1d8f2a050a2c686d2e94054abf9
+│   │   │── 54
+│   │   │   └── 382e6e147a31d5108648fc99f45e3e9683b3e5
+│   │   │── 55
+│   │   │   └── 33f6f5d074538bc8359c5a4db51ca6da6150c5
+│   │   │── 57
+│   │   │   └── 4be3031bc45c958faefab1f05259fcd547714a
+│   │   │── 5c
+│   │   │   │── 27917323a8c90b9228bb47c9555559ef744f67
+│   │   │   │── 28db8e47f8bbdd7102968e0ad2d52c9684b80d
+│   │   │   └── 93dc1db8f39df8195c04700c7b78a437f91287
+│   │   │── 5d
+│   │   │   └── e58fb5429f00ec68e5911e469c79f7db1c71e3
+│   │   │── 5f
+│   │   │   └── 431e5692888c4e8dbb0c45e8a543abb331ebf3
+│   │   │── 60
+│   │   │   │── ba84b949bf30e4696f50d3bc2273d909349640
+│   │   │   └── d5b110c47337475e1d2c0e997e59c9c7507506
+│   │   │── 63
+│   │   │   └── bdcf90bd2c42cf12a7df9d32c10fbed08b3c9c
+│   │   │── 6f
+│   │   │   │── 5c2675004051fcf0b73751528d7a07b5c27dbe
+│   │   │   │── 74f3a9fb395a91c8853ede0c2ae8484236d6c0
+│   │   │   └── 760be0a0cebfed6511a29360b0b5c6437992d8
+│   │   │── 71
+│   │   │   └── 1fadfdee7c4ae2caac6c07d0a2f4bc78c30259
+│   │   │── 72
+│   │   │   └── 815d2d2040f6b7e89b123e01ad3b4f6bbdd651
+│   │   │── 74
+│   │   │   │── 4cd083360c714709d5c219a916af45ba250e66
+│   │   │   └── 9a19b763fc1e4eb8bd232a4ab4ff243f155673
+│   │   │── 75
+│   │   │   └── a86780a44c75c0d29f413521923d940169e373
+│   │   │── 76
+│   │   │   └── c2c670e66898e0e06816a866bb1b94ab4c4156
+│   │   │── 80
+│   │   │   └── 6123ced743ea15a51a1f06c8c8bff8cc8cd266
+│   │   │── 83
+│   │   │   └── b7ed7816878f5710f34c9c5d21cc40a953c820
+│   │   │── 88
+│   │   │   └── 9f86ab8130e9fb59839c786257553e3d95f62d
+│   │   │── 8a
+│   │   │   └── 1739567c2e45861ec504ff1f82bd3b7d9e34b6
+│   │   │── 8d
+│   │   │   │── 26b65e885a4f40f96174d8d972390d1d9f7b69
+│   │   │   └── bdc2fdbfaf74f57c905eeb004ab609864ac878
+│   │   │── 8e
+│   │   │   └── 8882ffd0e2608aaf184562e327f9cda870c57d
+│   │   │── 8f
+│   │   │   │── 51128219018b5355215136b34bb40911b0191c
+│   │   │   └── 8a9f079acde6b44f065ce8a4069ebe42af758c
+│   │   │── 90
+│   │   │   └── 55dad11a186e6c10a6926d0efeba64a728d7a6
+│   │   │── 93
+│   │   │   └── 04c35bf910a5aaa564458a1d365adef1d60454
+│   │   │── 99
+│   │   │   └── 2c6d7aa88c445a368b3a7cb0d8c2c807fb1dc2
+│   │   │── 9a
+│   │   │   └── 1185243e5eb941e7c1bf7d9baa5e7ea0d352b9
+│   │   │── 9d
+│   │   │   └── 8bc4faa5aaf58a08bdcc259d2756d1d0705bed
+│   │   │── 9f
+│   │   │   │── 152e3c1528058987b44244c3a4aad1d6f2aee1
+│   │   │   └── 91396f421835556264c50fd3a87b4f05355f70
+│   │   │── a0
+│   │   │   └── b40e52c2412b27a5a7d149e8f83a5d34f19b07
+│   │   │── a1
+│   │   │   └── c4b89d6910f0682f5d89bf86b36164b5b8d5fe
+│   │   │── a3
+│   │   │   └── 2b5412f4934ee839a84211f2caf5d5e8f09a84
+│   │   │── a4
+│   │   │   └── 70f3a47301a69abca5397d1d3aa388f20bdf1d
+│   │   │── ab
+│   │   │   └── e1a4d9284320cf470b6b19fe9aa7ba3204176f
+│   │   │── ad
+│   │   │   └── 26a5ac69e922fa6a6716ce0f49820e3b81a40d
+│   │   │── b4
+│   │   │   └── 570a1e93ca652301725081dbf07484e49867b5
+│   │   │── b6
+│   │   │   └── f4fb58b1af6ff0cbf7a360900f18247e8964bf
+│   │   │── b8
+│   │   │   │── 05a63cce61be717f592a9e786d144eb5749ab6
+│   │   │   │── b4c31355b34dc5ecb8f8cadae1128ba2bec03e
+│   │   │   └── cd104f244317eb990aef8e9bead8ae0573ad57
+│   │   │── b9
+│   │   │   └── 2f58b7948f1ff013ef14098bb488466016c52b
+│   │   │── ba
+│   │   │   └── 746dbde0e1b699789784b3c147f76041d68b21
+│   │   │── bb
+│   │   │   │── 14b0652e87e35192565afb6aa5f18e8d7de667
+│   │   │   └── 6beeb42f781175c4af9bee26a6cd99de21f355
+│   │   │── bc
+│   │   │   └── a29f648b9cc29fa8d81c13def01d1e80bde55f
+│   │   │── be
+│   │   │   └── 1aebb189f526c36e7ecff6ef1e5e404f07d00f
+│   │   │── c0
+│   │   │   │── f0de1d322c8a50f3b846b1e556a75931e772f1
+│   │   │   └── f207de81e6e9af1b8681ced4f86204a862f9a5
+│   │   │── c3
+│   │   │   └── 21127d889d52bae3319f530e274ea0edd2be6f
+│   │   │── c8
+│   │   │   └── 892ee390ca49963cefb38b1ae74c663f46ebde
+│   │   │── c9
+│   │   │   │── 35cb2189ef7a30481bffcb2dafa330c2f9ed75
+│   │   │   │── c4fe74f16f552af82fcfca512d1d93da462e1d
+│   │   │   └── d6b780d6b306e7d588b7c1624e2c6b004d7c7e
+│   │   │── cc
+│   │   │   │── 1ff2f59c6c9ecccb88a718ad2f2171702e0e16
+│   │   │   └── 61fdaadc34c450667a4db60d5cde2c86e7d709
+│   │   │── ce
+│   │   │   └── fb7ab7f7cf3804082ff5a7fa4aba792f6368f0
+│   │   │── cf
+│   │   │   └── b6bd64afa098d6dc04876e801bea06110f52a1
+│   │   │── d0
+│   │   │   └── cc0b783f9ff46fb81249126cec4289629d192e
+│   │   │── d7
+│   │   │   └── cad6014f2a30cc8a1613183925d2ef4c91f647
+│   │   │── da
+│   │   │   └── 390b9e5ce774f5ee68e1dba0c3f5c3dcb4800b
+│   │   │── db
+│   │   │   │── ad7614d508a5c116280d4c77de2c7f9a53e410
+│   │   │   └── cda2f5112a1cfd7ed3bfa260ace14ea5a1d4f6
+│   │   │── dc
+│   │   │   │── 242227638a8a3062c7d1f459a945a84926b375
+│   │   │   └── b47b13cb3557557483fdd2b17085dea8ab769d
+│   │   │── df
+│   │   │   └── 4accaef6075aa6f2653f5aaa9e582945163b35
+│   │   │── e0
+│   │   │   └── 0e65750694d086729e3854164e63ad3d9ca596
+│   │   │── e2
+│   │   │   └── 7ab450bf2c343d1e0e30f7015cecc719f8bc80
+│   │   │── e3
+│   │   │   └── c4cae2103ac046efd59d3e4745c693b3d91644
+│   │   │── e5
+│   │   │   └── 02dfb55177b36b7e69883f0d981dedf087aaac
+│   │   │── e6
+│   │   │   └── 9de29bb2d1d6434b8b29ae775ad8c2e48c5391
+│   │   │── e7
+│   │   │   └── 4a3af4a8fb4ad03de7e8da6f5cca30d5e2a8fb
+│   │   │── e8
+│   │   │   └── 334445f24051373cd0d7e1a399f3cdf9108f25
+│   │   │── ea
+│   │   │   └── b2f95255dab562b115e42912ab599b7754c97b
+│   │   │── eb
+│   │   │   │── 35c3e73f1451f259b2dfe8a72a5de95ad34e88
+│   │   │   └── 49a02ec76fe8ed0a2b15705354426a730a4070
+│   │   │── f1
+│   │   │   └── 9b0084e1038a8164b2bc21ec30eb381a799c83
+│   │   │── f2
+│   │   │   │── ee91aca33cec72d97facd06514584137292e09
+│   │   │   └── f894137a63dcee89326cee18bd953dc9245f88
+│   │   │── f3
+│   │   │   └── 9fb00b76699eaaefec9ca98198571a92215e76
+│   │   │── f6
+│   │   │   └── a23eb40a64db982eb9f619f0aed1ce7a39d754
+│   │   │── f7
+│   │   │   └── 045be5ebd41dee115ec4ad5ceff64021015054
+│   │   │── f8
+│   │   │   └── 436503675466fc6eaab56c6578ad61db94dfee
+│   │   │── fa
+│   │   │   └── 69c8bb06d7166c4c1218dd08ca3e5c748a8120
+│   │   │── fd
+│   │   │   │── 2731519f32d5a768263c2f85de004b64ce90d3
+│   │   │   └── 7a652d6962a13b21d1fbd0896a233ee6f9d960
+│   │   │── info
+│   │   └── pack
+│   └── refs
+│       │── heads
+│       │   └── main
+│       │── remotes
+│       │   └── origin
+│       │       └── main
+│       └── tags
+│── demo
+│   │── manuais
+│   │   │── Manual_Tecnico.md
+│   │   └── Manual_Utilizador.md
+│   │── pom.xml
+│   │── src
+│   │   │── main
+│   │   │   └── java
+│   │   │       └── com
+│   │   │           └── example
+│   │   │               │── fabrica
+│   │   │               │   │── BarcoFactory.java
+│   │   │               │   │── CarroFactory.java
+│   │   │               │   │── MotaFactory.java
+│   │   │               │   └── VeiculoFactory.java
+│   │   │               │── facade
+│   │   │               │   └── GaragemFacade.java
+│   │   │               │── garagem
+│   │   │               │   │── Garagem.java
+│   │   │               │   │── GrupoVeiculos.java
+│   │   │               │   └── IteradorGaragem.java
+│   │   │               │── loop
+│   │   │               │   │── GaragemLoop.java
+│   │   │               │   │── ListaCircular.java
+│   │   │               │   └── No.java
+│   │   │               │── Main.java
+│   │   │               │── matricula
+│   │   │               │   │── EstrategiaMatricula.java
+│   │   │               │   │── Matricula.java
+│   │   │               │   │── MatriculaMaritima.java
+│   │   │               │   └── MatriculaTerrestre.java
+│   │   │               └── veiculo
+│   │   │                   │── Barco.java
+│   │   │                   │── Carro.java
+│   │   │                   │── ElementoGaragem.java
+│   │   │                   │── Mota.java
+│   │   │                   │── TipoVeiculo.java
+│   │   │                   └── Veiculo.java
+│   │   └── test
+│   │       └── java
+│   │           └── com
+│   │               └── example
+│   │                   │── fabrica
+│   │                   │   └── VeiculoFactoryTest.java
+│   │                   │── facade
+│   │                   │   └── GaragemFacadeTest.java
+│   │                   │── garagem
+│   │                   │   └── GaragemTest.java
+│   │                   │── loop
+│   │                   │   │── GaragemLoopTest.java
+│   │                   │   └── ListaCircularTest.java
+│   │                   └── matricula
+│   │                       │── MatriculaMaritimaTest.java
+│   │                       └── MatriculaTerrestreTest.java
+│   └── target
+│       │── classes
+│       │   └── com
+│       │       └── example
+│       │           │── fabrica
+│       │           │   │── BarcoFactory.class
+│       │           │   │── CarroFactory.class
+│       │           │   │── MotaFactory.class
+│       │           │   └── VeiculoFactory.class
+│       │           │── facade
+│       │           │   └── GaragemFacade.class
+│       │           │── garagem
+│       │           │   │── Garagem.class
+│       │           │   │── GrupoVeiculos.class
+│       │           │   └── IteradorGaragem.class
+│       │           │── loop
+│       │           │   │── GaragemLoop$Passo.class
+│       │           │   │── GaragemLoop.class
+│       │           │   │── ListaCircular.class
+│       │           │   └── No.class
+│       │           │── Main.class
+│       │           │── matricula
+│       │           │   │── EstrategiaMatricula.class
+│       │           │   │── Matricula.class
+│       │           │   │── MatriculaMaritima.class
+│       │           │   └── MatriculaTerrestre.class
+│       │           └── veiculo
+│       │               │── Barco.class
+│       │               │── Carro.class
+│       │               │── ElementoGaragem.class
+│       │               │── Mota.class
+│       │               │── TipoVeiculo.class
+│       │               └── Veiculo.class
+│       │── generated-sources
+│       │   └── annotations
+│       │── generated-test-sources
+│       │   └── test-annotations
+│       │── maven-status
+│       │   └── maven-compiler-plugin
+│       │       │── compile
+│       │       │   └── default-compile
+│       │       │       │── createdFiles.lst
+│       │       │       └── inputFiles.lst
+│       │       └── testCompile
+│       │           └── default-testCompile
+│       │               │── createdFiles.lst
+│       │               └── inputFiles.lst
+│       │── surefire-reports
+│       │   │── com.example.fabrica.VeiculoFactoryTest.txt
+│       │   │── com.example.facade.GaragemFacadeTest.txt
+│       │   │── com.example.garagem.GaragemTest.txt
+│       │   │── com.example.loop.GaragemLoopTest.txt
+│       │   │── com.example.loop.ListaCircularTest.txt
+│       │   │── com.example.matricula.MatriculaMaritimaTest.txt
+│       │   │── com.example.matricula.MatriculaTerrestreTest.txt
+│       │   │── TEST-com.example.fabrica.VeiculoFactoryTest.xml
+│       │   │── TEST-com.example.facade.GaragemFacadeTest.xml
+│       │   │── TEST-com.example.garagem.GaragemTest.xml
+│       │   │── TEST-com.example.loop.GaragemLoopTest.xml
+│       │   │── TEST-com.example.loop.ListaCircularTest.xml
+│       │   │── TEST-com.example.matricula.MatriculaMaritimaTest.xml
+│       │   └── TEST-com.example.matricula.MatriculaTerrestreTest.xml
+│       └── test-classes
+│           └── com
+│               └── example
+│                   │── fabrica
+│                   │   └── VeiculoFactoryTest.class
+│                   │── facade
+│                   │   └── GaragemFacadeTest.class
+│                   │── garagem
+│                   │   └── GaragemTest.class
+│                   │── loop
+│                   │   │── GaragemLoopTest.class
+│                   │   └── ListaCircularTest.class
+│                   └── matricula
+│                       │── MatriculaMaritimaTest.class
+│                       └── MatriculaTerrestreTest.class
+└── README.md
