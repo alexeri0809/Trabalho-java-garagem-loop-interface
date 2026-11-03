@@ -1,0 +1,136 @@
+trabalho-java-garagem
+└── demo
+    │── manuais
+    │   │── Manual_Tecnico.md
+    │   └── Manual_Utilizador.md
+    │── pom.xml
+    │── src
+    │   │── main
+    │   │   └── java
+    │   │       └── com
+    │   │           └── example
+    │   │               │── App.java
+    │   │               │── controller
+    │   │               │   │── GaragemController.java
+    │   │               │   │── LoopController.java
+    │   │               │   └── Navegacao.java
+    │   │               │── fabrica
+    │   │               │   │── BarcoFactory.java
+    │   │               │   │── CarroFactory.java
+    │   │               │   │── MotaFactory.java
+    │   │               │   └── VeiculoFactory.java
+    │   │               │── facade
+    │   │               │   └── GaragemFacade.java
+    │   │               │── garagem
+    │   │               │   │── Garagem.java
+    │   │               │   │── GrupoVeiculos.java
+    │   │               │   └── IteradorGaragem.java
+    │   │               │── loop
+    │   │               │   │── GaragemLoop.java
+    │   │               │   │── ListaCircular.java
+    │   │               │   └── No.java
+    │   │               │── Main.java
+    │   │               │── matricula
+    │   │               │   │── EstrategiaMatricula.java
+    │   │               │   │── Matricula.java
+    │   │               │   │── MatriculaMaritima.java
+    │   │               │   └── MatriculaTerrestre.java
+    │   │               │── veiculo
+    │   │               │   │── Barco.java
+    │   │               │   │── Carro.java
+    │   │               │   │── ElementoGaragem.java
+    │   │               │   │── Mota.java
+    │   │               │   │── TipoVeiculo.java
+    │   │               │   └── Veiculo.java
+    │   │               └── view
+    │   │                   │── CenaGaragemView.java
+    │   │                   │── CenaLoopView.java
+    │   │                   └── componentes
+    │   │                       │── BotaoVisual.java
+    │   │                       │── CampoRotulado.java
+    │   │                       │── FormularioVeiculo.java
+    │   │                       │── ListaVeiculosView.java
+    │   │                       │── PainelLoop.java
+    │   │                       └── VagaView.java
+    │   └── test
+    │       └── java
+    │           └── com
+    │               └── example
+    │                   │── fabrica
+    │                   │   └── VeiculoFactoryTest.java
+    │                   │── facade
+    │                   │   └── GaragemFacadeTest.java
+    │                   │── garagem
+    │                   │   └── GaragemTest.java
+    │                   │── loop
+    │                   │   │── GaragemLoopTest.java
+    │                   │   └── ListaCircularTest.java
+    │                   └── matricula
+    │                       │── MatriculaMaritimaTest.java
+    │                       └── MatriculaTerrestreTest.java
+    └── target
+        │── classes
+        │   └── com
+        │       └── example
+        │           │── App.class
+        │           │── controller
+        │           │   │── GaragemController.class
+        │           │   │── LoopController.class
+        │           │   └── Navegacao.class
+        │           │── fabrica
+        │           │   │── BarcoFactory.class
+        │           │   │── CarroFactory.class
+        │           │   │── MotaFactory.class
+        │           │   └── VeiculoFactory.class
+        │           │── facade
+        │           │   └── GaragemFacade.class
+        │           │── garagem
+        │           │   │── Garagem.class
+        │           │   │── GrupoVeiculos.class
+        │           │   └── IteradorGaragem.class
+        │           │── loop
+        │           │   │── GaragemLoop$Passo.class
+        │           │   │── GaragemLoop.class
+        │           │   │── ListaCircular.class
+        │           │   └── No.class
+        │           │── Main.class
+        │           │── matricula
+        │           │   │── EstrategiaMatricula.class
+        │           │   │── Matricula.class
+        │           │   │── MatriculaMaritima.class
+        │           │   └── MatriculaTerrestre.class
+        │           │── veiculo
+        │           │   │── Barco.class
+        │           │   │── Carro.class
+        │           │   │── ElementoGaragem.class
+        │           │   │── Mota.class
+        │           │   │── TipoVeiculo.class
+        │           │   └── Veiculo.class
+        │           └── view
+        │               │── CenaGaragemView.class
+        │               │── CenaLoopView.class
+        │               └── componentes
+        │                   │── BotaoVisual$Estilo.class
+        │                   │── BotaoVisual.class
+        │                   │── CampoRotulado.class
+        │                   │── FormularioVeiculo$1.class
+        │                   │── FormularioVeiculo.class
+        │                   │── ListaVeiculosView$1.class
+        │                   │── ListaVeiculosView.class
+        │                   │── PainelLoop.class
+        │                   └── VagaView.class
+        └── test-classes
+            └── com
+                └── example
+                    │── fabrica
+                    │   └── VeiculoFactoryTest.class
+                    │── facade
+                    │   └── GaragemFacadeTest.class
+                    │── garagem
+                    │   └── GaragemTest.class
+                    │── loop
+                    │   │── GaragemLoopTest.class
+                    │   └── ListaCircularTest.class
+                    └── matricula
+                        │── MatriculaMaritimaTest.class
+                        └── MatriculaTerrestreTest.class
