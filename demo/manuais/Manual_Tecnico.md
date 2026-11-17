@@ -6,9 +6,9 @@
 
 ## 1. Descrição do projeto
 
-Aplicação em **Java** com interface gráfica **JavaFX** (padrão MVC), gerida com **Maven**, que simula uma garagem com capacidade máxima de **4 veículos**, independentemente do tipo de veículo estacionado (ex: 4 motas, 2 barcos + 2 carros, etc.). O limite é 4 porque o loop (ver abaixo) tem 5 vagas e uma delas tem de ficar sempre `Vazio`.
+Aplicação em **Java** com interface gráfica **JavaFX** (padrão MVC), gerida com **Maven**, que simula **três rodas interligadas** (esquerda, central e direita). Cada roda tem a sua garagem com capacidade máxima de **4 veículos**, independentemente do tipo (ex: 4 motas, 2 barcos + 2 carros, etc.). O limite é 4 porque cada roda tem 5 vagas e uma delas tem de ficar sempre `Vazio`.
 
-O utilizador escolhe, através de uma janela com campos de texto para a marca e o modelo, que veículos quer adicionar (**Carro**, **Barco** ou **Mota**); a matrícula é gerada automaticamente.
+O utilizador escolhe, através de uma janela com a escolha da roda e campos de texto para a marca e o modelo, que veículos quer adicionar (**Carro**, **Barco** ou **Mota**); a matrícula é gerada automaticamente.
 
 Os veículos escolhidos podem depois ser postos a **rodar num loop** (botão *Iniciar loop*, que abre a segunda janela): uma garagem circular de 5 vagas em que os veículos escolhidos ocupam as primeiras vagas, as restantes ficam `Vazio`, o `Vazio` anda à volta sem parar e, no fim de cada volta, o veículo mais antigo sai e entra um novo do mesmo tipo com matrícula nova. Esta parte vem do projeto *Trabalho-java-garagem-loop*, generalizado para suportar vários tipos de veículo e vários `Vazio`.
 
@@ -49,6 +49,7 @@ trabalho-java-garagem
         │   │           │       ├── FormularioVeiculo.java
         │   │           │       ├── ListaVeiculosView.java
         │   │           │       ├── PainelLoop.java
+        │   │           │       ├── RodaView.java
         │   │           │       └── VagaView.java
         │   │           ├── veiculo/
         │   │           │   ├── Veiculo.java
@@ -74,7 +75,11 @@ trabalho-java-garagem
         │   │           ├── loop/
         │   │           │   ├── No.java
         │   │           │   ├── ListaCircular.java
-        │   │           │   └── GaragemLoop.java
+        │   │           │   ├── GaragemLoop.java
+        │   │           │   ├── Sentido.java
+        │   │           │   ├── PosicaoRoda.java
+        │   │           │   ├── Roda.java
+        │   │           │   └── ConjuntoRodas.java
         │   │           └── facade/
         │   │               └── GaragemFacade.java
         │   └── resources
@@ -91,7 +96,8 @@ trabalho-java-garagem
                         │   └── VeiculoFactoryTest.java
                         ├── loop/
                         │   ├── ListaCircularTest.java
-                        │   └── GaragemLoopTest.java
+                        │   ├── GaragemLoopTest.java
+                        │   └── ConjuntoRodasTest.java
                         └── facade/
                             └── GaragemFacadeTest.java
 ```
@@ -153,6 +159,25 @@ Não corresponde a um dos 5 padrões pedidos; é uma estrutura de dados própria
 
 ---
 
+## 3.1.1 As três rodas (esquerda, central e direita)
+
+O conjunto de três rodas foi acrescentado **sem alterar** a `ListaCircular`, o `GaragemLoop` nem a `Garagem`: cada roda reutiliza uma `Garagem` e um `GaragemLoop` próprios, e só se acrescentou o que junta as três.
+
+| Classe | O que faz |
+|---|---|
+| `Sentido` | `HORARIO` ou `ANTI_HORARIO`. |
+| `PosicaoRoda` | `ESQUERDA`, `CENTRAL`, `DIREITA`, cada uma com o nome e o **sentido do `Vazio`**. É o único sítio onde se define o sentido (linhas 10 a 12). |
+| `Roda` | Uma roda: embrulha um `GaragemLoop`. Aceita uma roda **sem veículos**, que fica parada com 5 `Vazio` (o `GaragemLoop` sozinho continua a recusar 0 veículos). |
+| `ConjuntoRodas` | O "tronco": junta as três `Roda`. O seu `avancar()` é o único relógio do sistema e dá um passo nas três ao mesmo tempo. |
+
+- **Sincronização:** o `LoopController` tem uma só `Timeline` e chama `GaragemFacade.avancarRodas()`, que chama `ConjuntoRodas.avancar()`. Nenhuma roda anda sozinha, por isso as três dão sempre um passo no mesmo instante. Cada passo move sempre um veículo uma vaga em cada roda que tenha veículos.
+- **Sentido:** o Model não tem geometria. Cada `PosicaoRoda` indica o sentido do `Vazio`; a `RodaView` dispõe as vagas no círculo no sentido horário (`HORARIO`) ou ao contrário (`ANTI_HORARIO`). Como o `Vazio` avança de uma vaga para a seguinte, numa roda anti-horária ele anda no sentido anti-horário no ecrã (e os veículos recuam no horário). A lógica do `Vazio` é igual nas três rodas.
+- **Veículos próprios por roda:** a `GaragemFacade` tem uma `Garagem` por roda (`EnumMap<PosicaoRoda, Garagem>`), até 4 veículos cada. `adicionarVeiculo(roda, tipo, marca, modelo)` escolhe a roda. Os métodos antigos sem `PosicaoRoda` (`adicionarVeiculo(tipo, ...)`, `getVeiculos()`, `vagasLoop()`, `avancarLoop()`) continuam a existir e falam com a **roda central**.
+- **Fim de volta:** cada roda conta a sua volta pelo `percursoTotal` do seu `GaragemLoop`. Quando uma roda completa a volta, o veículo mais antigo **dessa roda** é trocado por um novo do mesmo tipo e a `Garagem` dessa roda é atualizada. As rodas podem completar a volta em passos diferentes, porque o número de veículos de cada uma pode ser diferente.
+- **Roda sem veículos:** fica parada e nunca marca fim de volta. O loop só arranca se houver pelo menos 1 veículo no total (`iniciarLoop()` devolve `false` caso contrário).
+
+---
+
 ## 3.2 Interface gráfica: JavaFX com MVC
 
 O terminal foi substituído por uma interface JavaFX. A aplicação segue o padrão **MVC** (Model – View – Controller):
@@ -174,15 +199,16 @@ O terminal foi substituído por uma interface JavaFX. A aplicação segue o padr
 |---|---|
 | `BotaoVisual` | Botão com todas as regras de aspeto num só sítio |
 | `CampoRotulado` | Título + campo de texto |
-| `FormularioVeiculo` | ComboBox do tipo + 2 `CampoRotulado` (marca, modelo) + `BotaoVisual` + mensagem |
-| `ListaVeiculosView` | Título com contador + lista |
+| `FormularioVeiculo` | ComboBox da roda + ComboBox do tipo + 2 `CampoRotulado` (marca, modelo) + `BotaoVisual` + mensagem |
+| `ListaVeiculosView` | Título (nome da roda e contador) + lista |
 | `VagaView` | Uma vaga do loop (veículo ou `Vazio`) |
-| `PainelLoop` | 5 `VagaView` em círculo + anel + contador de voltas |
-| `CenaGaragemView` (tronco) | `FormularioVeiculo` + `ListaVeiculosView` + 2 `BotaoVisual` |
+| `RodaView` | Uma roda: 5 `VagaView` em círculo + anel + contador de voltas + nome e sentido |
+| `PainelLoop` (tronco das rodas) | 3 `RodaView` lado a lado + as 2 ligações entre elas |
+| `CenaGaragemView` (tronco) | `FormularioVeiculo` + 3 `ListaVeiculosView` em separadores + 2 `BotaoVisual` |
 | `CenaLoopView` (tronco) | `PainelLoop` + mensagem + 2 `BotaoVisual` |
 
 - **Um objeto com várias funções:** o `FormularioVeiculo` escolhe o tipo, recolhe marca e modelo, mostra mensagens de erro/sucesso, liga/desliga o botão e limpa-se; o `BotaoVisual` serve de botão principal, secundário ou de perigo conforme o `Estilo`.
-- **As regras dos objetos são tuas:** as cores e o aspeto dos botões estão numa única zona do `BotaoVisual` (linhas 13 a 18, bloco "REGRAS DOS BOTÕES"); as cores dos veículos em `VagaView` (linhas 18 a 20). Alterando ali muda em todas as janelas.
+- **As regras dos objetos são tuas:** as cores e o aspeto dos botões estão numa única zona do `BotaoVisual` (linhas 13 a 18, bloco "REGRAS DOS BOTÕES"); as cores dos veículos em `VagaView` (linhas 18 a 20) e o sentido de cada roda em `PosicaoRoda` (linhas 10 a 12). Alterando ali muda em todas as janelas.
 
 ### Fluxo ao adicionar um veículo
 
@@ -193,7 +219,7 @@ O terminal foi substituído por uma interface JavaFX. A aplicação segue o padr
 
 ### Loop animado
 
-O `LoopController` usa uma `Timeline` do JavaFX (a cada `PAUSA_MS` = 700 ms) que chama `GaragemFacade.avancarLoop()` e manda o `PainelLoop` desenhar `GaragemFacade.vagasLoop()`. A `Timeline` corre na thread da interface, por isso a janela não bloqueia, e substitui o `Thread.sleep` do programa de terminal. O botão *Voltar* e o fecho da janela (`App.stop()`) param o relógio.
+O `LoopController` usa uma `Timeline` do JavaFX (a cada `PAUSA_MS` = 700 ms) que chama `GaragemFacade.avancarRodas()` e manda o `PainelLoop` desenhar `GaragemFacade.vagasLoop(roda)` de cada uma das três rodas. A `Timeline` corre na thread da interface, por isso a janela não bloqueia, e substitui o `Thread.sleep` do programa de terminal. O botão *Voltar* e o fecho da janela (`App.stop()`) param o relógio.
 
 ### Mudanças no Model para servir a interface
 
@@ -213,11 +239,12 @@ Os testes correm através do Maven (`mvn test`) e ficam em `src/test/java`, espe
 | `MatriculaMaritimaTest` | O formato da matrícula de Barco está correto (`6º-CO-7-15-21`) |
 | `GaragemTest` | A garagem começa vazia, nunca ultrapassa 4 lugares, aceita qualquer combinação de tipos e lista os veículos por ordem de chegada |
 | `VeiculoFactoryTest` | Cada fábrica (`CarroFactory`, `BarcoFactory`, `MotaFactory`) cria o tipo certo, com a marca/modelo corretos |
-| `GaragemFacadeTest` | A `GaragemFacade` respeita o limite de 4 lugares, remove veículos, recusa iniciar o loop sem veículos, devolve sempre 5 vagas do loop e mantém a garagem em sintonia com as trocas |
+| `GaragemFacadeTest` | A `GaragemFacade` respeita o limite de 4 lugares por roda (rodas independentes), remove veículos de qualquer roda, recusa iniciar o loop sem veículos, devolve sempre 5 vagas do loop e mantém a garagem de cada roda em sintonia com as trocas |
+| `ConjuntoRodasTest` | Sentido de cada roda; arranque recusado sem veículos; cada roda com os seus veículos e `Vazio`; roda sem veículos fica parada; as três rodas mexem-se sempre no mesmo passo; a composição de cada roda mantém-se ao fim de muitas voltas; o fim de volta troca o mais antigo da própria roda |
 | `ListaCircularTest` | Vários `Vazio`, mover o `Vazio` (incluindo saltar por cima de outros `Vazio`), substituir o mais antigo e casos de erro |
 | `GaragemLoopTest` | 2 carros + 1 mota dão 2 `Vazio`; recusa 0 e 5 veículos; 5 vagas e pelo menos 1 `Vazio` em qualquer combinação; fim de volta troca o mais antigo por um do mesmo tipo; a composição mantém-se ao longo de várias voltas |
 
-Resultado obtido na última execução: **38 testes, 0 falhas, 0 erros**. Nota: esta contagem foi obtida a compilar o Model com `javac` e a correr os testes com um executor mínimo equivalente às asserções do JUnit (o ambiente onde foi feito o trabalho não tinha acesso ao Maven nem ao JavaFX). Corre `mvn test` na tua máquina para confirmar com o JUnit 5 real. **A interface gráfica (`view`, `controller`, `App`) não tem testes automáticos**: verifica-se abrindo o programa.
+Resultado obtido na última execução do Model: **51 testes, 0 falhas, 0 erros**. Nota: esta contagem foi obtida a compilar o Model com `javac` e a correr os testes com um executor mínimo equivalente às asserções do JUnit (o ambiente onde foi feita esta alteração não tinha acesso ao Maven nem ao JavaFX). Corre `mvn test` na tua máquina para confirmar com o JUnit 5 real. **A interface gráfica (`view`, `controller`, `App`) não tem testes automáticos**: verifica-se abrindo o programa.
 
 ### Dependências necessárias no `pom.xml`
 

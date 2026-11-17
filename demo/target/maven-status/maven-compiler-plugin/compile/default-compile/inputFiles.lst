@@ -10,9 +10,13 @@ C:\Users\ba2672\Downloads\Trabalho-java-garagem-JavaFX-MVC\Trabalho-java-garagem
 C:\Users\ba2672\Downloads\Trabalho-java-garagem-JavaFX-MVC\Trabalho-java-garagem\trabalho-java-garagem\demo\src\main\java\com\example\garagem\Garagem.java
 C:\Users\ba2672\Downloads\Trabalho-java-garagem-JavaFX-MVC\Trabalho-java-garagem\trabalho-java-garagem\demo\src\main\java\com\example\garagem\GrupoVeiculos.java
 C:\Users\ba2672\Downloads\Trabalho-java-garagem-JavaFX-MVC\Trabalho-java-garagem\trabalho-java-garagem\demo\src\main\java\com\example\garagem\IteradorGaragem.java
+C:\Users\ba2672\Downloads\Trabalho-java-garagem-JavaFX-MVC\Trabalho-java-garagem\trabalho-java-garagem\demo\src\main\java\com\example\loop\ConjuntoRodas.java
 C:\Users\ba2672\Downloads\Trabalho-java-garagem-JavaFX-MVC\Trabalho-java-garagem\trabalho-java-garagem\demo\src\main\java\com\example\loop\GaragemLoop.java
 C:\Users\ba2672\Downloads\Trabalho-java-garagem-JavaFX-MVC\Trabalho-java-garagem\trabalho-java-garagem\demo\src\main\java\com\example\loop\ListaCircular.java
 C:\Users\ba2672\Downloads\Trabalho-java-garagem-JavaFX-MVC\Trabalho-java-garagem\trabalho-java-garagem\demo\src\main\java\com\example\loop\No.java
+C:\Users\ba2672\Downloads\Trabalho-java-garagem-JavaFX-MVC\Trabalho-java-garagem\trabalho-java-garagem\demo\src\main\java\com\example\loop\PosicaoRoda.java
+C:\Users\ba2672\Downloads\Trabalho-java-garagem-JavaFX-MVC\Trabalho-java-garagem\trabalho-java-garagem\demo\src\main\java\com\example\loop\Roda.java
+C:\Users\ba2672\Downloads\Trabalho-java-garagem-JavaFX-MVC\Trabalho-java-garagem\trabalho-java-garagem\demo\src\main\java\com\example\loop\Sentido.java
 C:\Users\ba2672\Downloads\Trabalho-java-garagem-JavaFX-MVC\Trabalho-java-garagem\trabalho-java-garagem\demo\src\main\java\com\example\Main.java
 C:\Users\ba2672\Downloads\Trabalho-java-garagem-JavaFX-MVC\Trabalho-java-garagem\trabalho-java-garagem\demo\src\main\java\com\example\matricula\EstrategiaMatricula.java
 C:\Users\ba2672\Downloads\Trabalho-java-garagem-JavaFX-MVC\Trabalho-java-garagem\trabalho-java-garagem\demo\src\main\java\com\example\matricula\Matricula.java
@@ -31,4 +35,5 @@ C:\Users\ba2672\Downloads\Trabalho-java-garagem-JavaFX-MVC\Trabalho-java-garagem
 C:\Users\ba2672\Downloads\Trabalho-java-garagem-JavaFX-MVC\Trabalho-java-garagem\trabalho-java-garagem\demo\src\main\java\com\example\view\componentes\FormularioVeiculo.java
 C:\Users\ba2672\Downloads\Trabalho-java-garagem-JavaFX-MVC\Trabalho-java-garagem\trabalho-java-garagem\demo\src\main\java\com\example\view\componentes\ListaVeiculosView.java
 C:\Users\ba2672\Downloads\Trabalho-java-garagem-JavaFX-MVC\Trabalho-java-garagem\trabalho-java-garagem\demo\src\main\java\com\example\view\componentes\PainelLoop.java
+C:\Users\ba2672\Downloads\Trabalho-java-garagem-JavaFX-MVC\Trabalho-java-garagem\trabalho-java-garagem\demo\src\main\java\com\example\view\componentes\RodaView.java
 C:\Users\ba2672\Downloads\Trabalho-java-garagem-JavaFX-MVC\Trabalho-java-garagem\trabalho-java-garagem\demo\src\main\java\com\example\view\componentes\VagaView.java

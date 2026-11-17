@@ -1,5 +1,6 @@
 package com.example.view.componentes;
 
+import com.example.loop.PosicaoRoda;
 import com.example.veiculo.TipoVeiculo;
 import javafx.geometry.Insets;
 import javafx.scene.control.ComboBox;
@@ -7,8 +8,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
 
+import java.util.function.Consumer;
+
 /**
- * Painel para escolher o tipo de veículo e escrever a marca e o modelo.
+ * Painel para escolher a roda e o tipo de veículo e escrever a marca e o modelo.
  * A matrícula não se escreve: é gerada automaticamente pelo Model.
  * Junta vários objetos mais pequenos (ComboBox, dois CampoRotulado, botão e mensagem).
  */
@@ -17,6 +20,7 @@ public class FormularioVeiculo extends VBox {
     private static final String COR_ERRO = "#c62828";
     private static final String COR_SUCESSO = "#2e7d32";
 
+    private final ComboBox<PosicaoRoda> roda = new ComboBox<>();
     private final ComboBox<TipoVeiculo> tipo = new ComboBox<>();
     private final CampoRotulado marca = new CampoRotulado("Marca", "ex.: Toyota");
     private final CampoRotulado modelo = new CampoRotulado("Modelo", "ex.: Corolla");
@@ -31,6 +35,24 @@ public class FormularioVeiculo extends VBox {
 
         Label titulo = new Label("Novo veículo");
         titulo.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #263238;");
+
+        roda.getItems().addAll(PosicaoRoda.values());
+        roda.setValue(PosicaoRoda.CENTRAL);
+        roda.setMaxWidth(Double.MAX_VALUE);
+        roda.setConverter(new StringConverter<PosicaoRoda>() {
+            @Override
+            public String toString(PosicaoRoda valor) {
+                return valor == null ? "" : valor.getNome();
+            }
+
+            @Override
+            public PosicaoRoda fromString(String texto) {
+                return null; // a ComboBox não é editável
+            }
+        });
+        Label tituloRoda = new Label("Roda");
+        tituloRoda.setStyle("-fx-font-weight: bold; -fx-text-fill: #37474f;");
+        VBox blocoRoda = new VBox(4, tituloRoda, roda);
 
         tipo.getItems().addAll(TipoVeiculo.values());
         tipo.getSelectionModel().selectFirst();
@@ -57,7 +79,21 @@ public class FormularioVeiculo extends VBox {
         botaoAdicionar.setMaxWidth(Double.MAX_VALUE);
         mensagem.setWrapText(true);
 
-        getChildren().addAll(titulo, blocoTipo, marca, modelo, nota, botaoAdicionar, mensagem);
+        getChildren().addAll(titulo, blocoRoda, blocoTipo, marca, modelo, nota, botaoAdicionar, mensagem);
+    }
+
+    public PosicaoRoda getRoda() {
+        return roda.getValue();
+    }
+
+    /** Escolhe a roda no formulário (não faz nada se já for essa). */
+    public void setRoda(PosicaoRoda posicao) {
+        roda.setValue(posicao);
+    }
+
+    /** O que fazer quando o utilizador escolhe outra roda; recebe a roda nova. Pode ser chamado várias vezes. */
+    public void aoMudarRoda(Consumer<PosicaoRoda> acao) {
+        roda.valueProperty().addListener((observado, antiga, nova) -> acao.accept(nova));
     }
 
     public TipoVeiculo getTipo() {

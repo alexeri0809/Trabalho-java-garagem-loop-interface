@@ -1,8 +1,11 @@
 package com.example.facade;
 
 import com.example.loop.GaragemLoop;
+import com.example.loop.PosicaoRoda;
 import com.example.veiculo.TipoVeiculo;
 import org.junit.jupiter.api.Test;
+
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -102,6 +105,82 @@ class GaragemFacadeTest {
             assertEquals(3L, vagas.stream().filter(v -> v == null).count());
             garagem.avancarLoop();
         }
+    }
+
+    // ---------- três rodas ----------
+
+    @Test
+    void cadaRodaTemOsSeusQuatroLugaresIndependentes() {
+        GaragemFacade garagem = new GaragemFacade();
+
+        for (int i = 0; i < 4; i++) {
+            assertTrue(garagem.adicionarVeiculo(PosicaoRoda.ESQUERDA, TipoVeiculo.CARRO, "M", "X"));
+        }
+        assertFalse(garagem.adicionarVeiculo(PosicaoRoda.ESQUERDA, TipoVeiculo.CARRO, "M", "X"));
+        assertEquals(0, garagem.getLugaresLivres(PosicaoRoda.ESQUERDA));
+
+        // as outras rodas não são afetadas
+        assertEquals(4, garagem.getLugaresLivres(PosicaoRoda.CENTRAL));
+        assertEquals(4, garagem.getLugaresLivres(PosicaoRoda.DIREITA));
+        assertTrue(garagem.adicionarVeiculo(PosicaoRoda.DIREITA, TipoVeiculo.BARCO, "M", "X"));
+        assertEquals(5, garagem.getTotalVeiculos());
+    }
+
+    @Test
+    void osMetodosAntigosFalamComARodaCentral() {
+        GaragemFacade garagem = new GaragemFacade();
+        assertTrue(garagem.adicionarVeiculo(TipoVeiculo.MOTA, "Yamaha", "MT-07"));
+
+        assertEquals(1, garagem.getVeiculos(PosicaoRoda.CENTRAL).size());
+        assertEquals(1, garagem.getVeiculos().size());
+        assertEquals(0, garagem.getVeiculos(PosicaoRoda.ESQUERDA).size());
+        assertEquals(0, garagem.getVeiculos(PosicaoRoda.DIREITA).size());
+    }
+
+    @Test
+    void removerVeiculoEncontraOVeiculoEmQualquerRoda() {
+        GaragemFacade garagem = new GaragemFacade();
+        garagem.adicionarVeiculo(PosicaoRoda.DIREITA, TipoVeiculo.BARCO, "Quicksilver", "Activ");
+
+        assertTrue(garagem.removerVeiculo(garagem.getVeiculos(PosicaoRoda.DIREITA).get(0)));
+
+        assertEquals(0, garagem.getTotalVeiculos());
+    }
+
+    @Test
+    void oLoopArrancaSoComVeiculosNumaRodaLateralEACentralFicaVazia() {
+        GaragemFacade garagem = new GaragemFacade();
+        garagem.adicionarVeiculo(PosicaoRoda.ESQUERDA, TipoVeiculo.CARRO, "Toyota", "Corolla");
+        assertTrue(garagem.iniciarLoop());
+
+        assertEquals(5, garagem.vagasLoop(PosicaoRoda.CENTRAL).stream().filter(v -> v == null).count());
+        assertEquals(4, garagem.vagasLoop(PosicaoRoda.ESQUERDA).stream().filter(v -> v == null).count());
+        // avancarLoop() devolve a roda central, que está parada: nunca marca volta
+        assertFalse(garagem.avancarLoop().voltaCompleta);
+    }
+
+    @Test
+    void avancarRodasMexeAsTresRodasEADaGaragemDeCadaRodaAcompanhaAsTrocas() {
+        GaragemFacade garagem = new GaragemFacade();
+        garagem.adicionarVeiculo(PosicaoRoda.ESQUERDA, TipoVeiculo.CARRO, "A", "A");
+        garagem.adicionarVeiculo(PosicaoRoda.CENTRAL, TipoVeiculo.MOTA, "B", "B");
+        garagem.adicionarVeiculo(PosicaoRoda.DIREITA, TipoVeiculo.BARCO, "C", "C");
+        garagem.iniciarLoop();
+        var antigosDaDireita = garagem.getVeiculos(PosicaoRoda.DIREITA);
+
+        Map<PosicaoRoda, GaragemLoop.Passo> passos;
+        do {
+            passos = garagem.avancarRodas();
+        } while (!passos.get(PosicaoRoda.DIREITA).voltaCompleta);
+
+        assertEquals(3, passos.size());
+        // cada roda continua com 1 veículo, do mesmo tipo, e o da direita foi trocado por um novo
+        assertEquals(1, garagem.getVeiculos(PosicaoRoda.DIREITA).size());
+        assertEquals(TipoVeiculo.BARCO, garagem.getVeiculos(PosicaoRoda.DIREITA).get(0).getTipo());
+        assertFalse(garagem.getVeiculos(PosicaoRoda.DIREITA).contains(antigosDaDireita.get(0)));
+        assertEquals(1, garagem.getVeiculos(PosicaoRoda.ESQUERDA).size());
+        assertEquals(1, garagem.getVeiculos(PosicaoRoda.CENTRAL).size());
+        assertEquals(3, garagem.getTotalVeiculos());
     }
 
     private static int contar(String texto, String procurado) {

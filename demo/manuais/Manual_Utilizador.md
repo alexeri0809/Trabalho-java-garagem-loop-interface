@@ -6,7 +6,7 @@
 
 ## 1. O que é este programa
 
-Um programa em Java com **interface gráfica (JavaFX)** que simula uma **garagem com 4 lugares para veículos** (mais 1 vaga que fica sempre livre, para o loop). Escolhes que veículos queres estacionar — **Carros**, **Barcos** ou **Motas**, em qualquer combinação — e depois pões-os a **rodar** numa garagem circular de 5 vagas.
+Um programa em Java com **interface gráfica (JavaFX)** que simula **três garagens circulares interligadas (rodas)**: a da **esquerda**, a **central** e a da **direita**. Cada roda tem 5 vagas e aceita até **4 veículos** (uma vaga fica sempre livre, para o loop). Escolhes a roda e os veículos de cada uma — **Carros**, **Barcos** ou **Motas**, em qualquer combinação — e depois pões as três rodas a **rodar ao mesmo tempo**.
 
 Cada veículo recebe automaticamente uma **matrícula aleatória**:
 
@@ -73,33 +73,40 @@ Se tudo correr bem, `mvn test` termina com `BUILD SUCCESS` e `mvn javafx:run` ab
 
 ## 4. Janela 1 — Garagem
 
-À esquerda está o painel **Novo veículo**; à direita a lista dos veículos que já estão na garagem.
+À esquerda está o painel **Novo veículo**; à direita há três separadores, um por roda, com os veículos de cada uma.
 
 | Elemento | O que faz |
 |---|---|
+| **Roda** | Escolhe em que roda o veículo vai ficar (esquerda, central ou direita). O separador da direita acompanha esta escolha, e vice-versa. |
 | **Tipo de veículo** | Escolhe Carro, Barco ou Mota. |
 | **Marca** e **Modelo** | Escreves aqui o texto. A **matrícula não se escreve**: é gerada automaticamente. |
-| **Adicionar à garagem** | Estaciona o veículo (também podes carregar em **Enter** num dos campos). A mensagem por baixo mostra a matrícula gerada. |
-| **Lista de veículos** | Mostra tipo, matrícula, marca e modelo. O título mostra quantos lugares estão ocupados (ex: `2/4`). |
-| **Remover selecionado** | Retira da garagem o veículo que escolheste na lista. |
-| **Iniciar loop ▶** | Abre a janela do loop com os veículos que estão na lista. Fica desligado se a garagem estiver vazia. |
+| **Adicionar à garagem** | Estaciona o veículo na roda escolhida (também podes carregar em **Enter** num dos campos). A mensagem por baixo mostra a matrícula gerada. |
+| **Separadores (listas)** | Cada um mostra tipo, matrícula, marca e modelo dos veículos dessa roda. O título mostra quantos lugares estão ocupados (ex: `Roda da esquerda (2/4)`). |
+| **Remover selecionado** | Retira da garagem o veículo que escolheste na lista do separador aberto. |
+| **Iniciar loop ▶** | Abre a janela do loop com os veículos de todas as rodas. Fica desligado se não houver nenhum veículo. |
 
-Se tentares adicionar sem preencher a marca e o modelo, aparece um aviso a vermelho. Quando a garagem tem **4 veículos** o botão *Adicionar* fica desligado: remove um veículo para poderes adicionar outro.
+Se tentares adicionar sem preencher a marca e o modelo, aparece um aviso a vermelho. Quando uma roda tem **4 veículos** o botão *Adicionar* fica desligado para essa roda: remove um veículo ou escolhe outra roda. As rodas são independentes: uma roda cheia não impede de adicionar às outras. Podes deixar uma roda sem veículos (fica parada), desde que haja pelo menos 1 veículo no total.
 
 ---
 
 ## 5. Janela 2 — Loop
 
-É uma garagem **circular com 5 vagas**. Os veículos que escolheste ocupam as primeiras vagas e **todas as restantes ficam `Vazio`** (há sempre pelo menos 1). Com **2 carros e 1 mota** ficam 3 veículos e 2 vagas vazias. Os veículos têm cor consoante o tipo: **azul** (carro), **azul-esverdeado** (barco) e **laranja** (mota).
+São **três rodas lado a lado**, ligadas entre si: **esquerda**, **central** e **direita**. Cada roda é uma garagem circular de 5 vagas: os veículos dessa roda ocupam as primeiras vagas e **todas as restantes ficam `Vazio`** (há sempre pelo menos 1). Os veículos têm cor consoante o tipo: **azul** (carro), **azul-esverdeado** (barco) e **laranja** (mota).
 
-**Como roda:** a cada 0,7 segundos o `Vazio` avança e o veículo que estava à frente dele recua uma vaga para o lugar vago.
+**Como rodam:** as três rodas andam **ao mesmo tempo**, a cada 0,7 segundos. Em cada roda, o `Vazio` avança e o veículo que estava à frente dele recua uma vaga para o lugar vago. O sentido em que o `Vazio` anda está escrito debaixo de cada roda:
 
-**Fim de cada volta:** o **contador no centro** sobe uma volta, o veículo **mais antigo** sai e entra um veículo **novo do mesmo tipo** (mesma marca e modelo) com **matrícula nova**. A mensagem por baixo mostra `Saiu` e `Entrou`. A combinação escolhida mantém-se: 2 carros e 1 mota continuam a ser 2 carros e 1 mota.
+| Roda | `Vazio` anda no sentido | Os veículos recuam no sentido |
+|---|---|---|
+| Esquerda | horário ↻ | anti-horário |
+| Central | horário ↻ | anti-horário |
+| Direita | anti-horário ↺ | horário |
+
+**Fim de cada volta:** em cada roda, quando o `Vazio` completa uma volta, o **contador dessa roda** sobe uma volta, o veículo **mais antigo dessa roda** sai e entra um veículo **novo do mesmo tipo** (mesma marca e modelo) com **matrícula nova**. A mensagem por baixo mostra `Saiu` e `Entrou` (uma linha por cada roda que completou a volta). Os veículos nunca passam de uma roda para outra: a combinação de cada roda mantém-se. Uma roda sem veículos fica parada.
 
 | Botão | O que faz |
 |---|---|
-| **Pausar / Retomar** | Pára ou continua a rotação. |
-| **◀ Voltar à garagem** | Pára o loop e volta à janela 1. A lista já mostra os veículos novos que entraram. |
+| **Pausar / Retomar** | Pára ou continua a rotação das três rodas. |
+| **◀ Voltar à garagem** | Pára o loop e volta à janela 1. As listas já mostram os veículos novos que entraram. |
 
 ---
 
@@ -107,6 +114,7 @@ Se tentares adicionar sem preencher a marca e o modelo, aparece um aviso a verme
 
 - **Cores dos botões:** ficheiro `src/main/java/com/example/view/componentes/BotaoVisual.java`, linhas **13 a 18** (verde principal, cinza secundário, vermelho de remover, cor da letra, cantos redondos e tamanho da letra).
 - **Cores dos veículos no loop:** ficheiro `src/main/java/com/example/view/componentes/VagaView.java`, linhas **18 a 20**.
+- **Sentido de cada roda:** ficheiro `src/main/java/com/example/loop/PosicaoRoda.java`, linhas **10 a 12** (`HORARIO` ou `ANTI_HORARIO` para cada roda). A janela ajusta-se sozinha.
 - **Velocidade do loop:** ficheiro `src/main/java/com/example/controller/LoopController.java`, constante `PAUSA_MS`.
 - **Tamanho e fundo das janelas:** no topo de `CenaGaragemView.java` e `CenaLoopView.java`.
 

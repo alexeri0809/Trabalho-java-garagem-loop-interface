@@ -1,8 +1,9 @@
 package com.example.view;
 
+import com.example.loop.PosicaoRoda;
+import com.example.veiculo.Veiculo;
 import com.example.view.componentes.BotaoVisual;
 import com.example.view.componentes.PainelLoop;
-import com.example.veiculo.Veiculo;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -10,19 +11,20 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 
 import java.util.List;
 
 /**
- * CENA 2 (janela 2): a garagem a rodar em loop.
- * É o "tronco" desta janela: junta o painel circular, a mensagem de fim de volta e os botões.
+ * CENA 2 (janela 2): as três rodas a rodar em loop.
+ * É o "tronco" desta janela: junta o painel das três rodas, a mensagem de fim de volta e os botões.
  * Não conhece o Model: só mostra o que o Controller lhe manda mostrar.
  */
 public class CenaLoopView extends BorderPane {
 
     // ======================== TAMANHO E FUNDO DA JANELA: altera aqui ========================
-    private static final double LARGURA_JANELA = 940;
-    private static final double ALTURA_JANELA = 640;
+    private static final double LARGURA_JANELA = 1140;
+    private static final double ALTURA_JANELA = 660;
     private static final String COR_FUNDO = "#eceff1";
     // =========================================================================================
 
@@ -40,13 +42,16 @@ public class CenaLoopView extends BorderPane {
 
         Label titulo = new Label("Garagem em loop");
         titulo.setStyle("-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #263238;");
-        Label subtitulo = new Label("O Vazio roda sem parar. No fim de cada volta sai o veículo mais antigo "
-                + "e entra um novo do mesmo tipo.");
+        Label subtitulo = new Label("As três rodas andam ao mesmo tempo. No fim de cada volta, em cada roda, "
+                + "sai o veículo mais antigo e entra um novo do mesmo tipo.");
         subtitulo.setStyle("-fx-text-fill: #607d8b;");
         VBox cabecalho = new VBox(2, titulo, subtitulo);
 
         mensagem.setStyle("-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #455a64;");
-        mensagem.setMinHeight(24);
+        mensagem.setMinHeight(52);
+        mensagem.setWrapText(true);
+        mensagem.setAlignment(Pos.CENTER);
+        mensagem.setTextAlignment(TextAlignment.CENTER);
 
         HBox barraBotoes = new HBox(10, botaoPausa, botaoVoltar);
         barraBotoes.setAlignment(Pos.CENTER);
@@ -74,13 +79,13 @@ public class CenaLoopView extends BorderPane {
         return botaoVoltar;
     }
 
-    /** Mostra as vagas do loop pela ordem do círculo (null = Vazio). */
-    public void mostrarVagas(List<Veiculo> vagas) {
-        painel.mostrar(vagas);
+    /** Mostra as vagas de uma roda pela ordem do círculo (null = Vazio). */
+    public void mostrarVagas(PosicaoRoda roda, List<Veiculo> vagas) {
+        painel.mostrar(roda, vagas);
     }
 
-    public void mostrarVoltas(int voltas) {
-        painel.mostrarVoltas(voltas);
+    public void mostrarVoltas(PosicaoRoda roda, int voltas) {
+        painel.mostrarVoltas(roda, voltas);
     }
 
     public void mostrarMensagem(String texto) {

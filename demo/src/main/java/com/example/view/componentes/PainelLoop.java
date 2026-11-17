@@ -1,69 +1,71 @@
 package com.example.view.componentes;
 
+import com.example.loop.PosicaoRoda;
 import com.example.veiculo.Veiculo;
-import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Ellipse;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
 
-import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 /**
- * O "tronco" do loop: junta as vagas (VagaView) dispostas em círculo, mais o anel de fundo
- * e o contador de voltas ao centro. Quem o usa só precisa de lhe dar a lista de vagas.
+ * O "tronco" das três rodas: junta as três RodaView lado a lado (esquerda, central, direita)
+ * e desenha as duas ligações entre elas, para se ver que formam um só conjunto.
+ * Quem o usa só precisa de lhe dizer que vagas mostrar em cada roda.
  */
 public class PainelLoop extends Pane {
 
-    private static final double LARGURA = 560;
-    private static final double ALTURA = 440;
-    private static final double RAIO_X = 210;
-    private static final double RAIO_Y = 155;
+    private static final double ESPACO_ENTRE_RODAS = 56;
+    /** A ligação fica um pouco abaixo do meio da roda, onde não há nenhuma vaga. */
+    private static final double DESCIDA_DA_LIGACAO = 25;
 
-    private final List<VagaView> vagas = new ArrayList<>();
-    private final Label contadorVoltas = new Label("Volta 0");
+    private final Map<PosicaoRoda, RodaView> rodas = new EnumMap<>(PosicaoRoda.class);
 
     public PainelLoop(int numeroVagas) {
-        setPrefSize(LARGURA, ALTURA);
-        setMinSize(LARGURA, ALTURA);
-        setMaxSize(LARGURA, ALTURA);
+        double largura = 3 * RodaView.LARGURA + 2 * ESPACO_ENTRE_RODAS;
+        setPrefSize(largura, RodaView.ALTURA);
+        setMinSize(largura, RodaView.ALTURA);
+        setMaxSize(largura, RodaView.ALTURA);
 
-        double centroX = LARGURA / 2;
-        double centroY = ALTURA / 2;
-
-        Ellipse anel = new Ellipse(centroX, centroY, RAIO_X, RAIO_Y);
-        anel.setFill(Color.TRANSPARENT);
-        anel.setStroke(Color.web("#cfd8dc"));
-        anel.setStrokeWidth(4);
-        getChildren().add(anel);
-
-        // A vaga 0 fica em cima e as seguintes seguem no sentido dos ponteiros do relógio
-        for (int i = 0; i < numeroVagas; i++) {
-            double angulo = Math.toRadians(-90 + i * 360.0 / numeroVagas);
-            VagaView vaga = new VagaView();
-            vaga.setLayoutX(centroX + RAIO_X * Math.cos(angulo) - VagaView.LARGURA / 2);
-            vaga.setLayoutY(centroY + RAIO_Y * Math.sin(angulo) - VagaView.ALTURA / 2);
-            vagas.add(vaga);
-            getChildren().add(vaga);
+        double x = 0;
+        for (PosicaoRoda posicao : PosicaoRoda.values()) {
+            RodaView roda = new RodaView(posicao, numeroVagas);
+            roda.setLayoutX(x);
+            rodas.put(posicao, roda);
+            getChildren().add(roda);
+            x += RodaView.LARGURA + ESPACO_ENTRE_RODAS;
         }
 
-        contadorVoltas.setPrefWidth(160);
-        contadorVoltas.setAlignment(Pos.CENTER);
-        contadorVoltas.setLayoutX(centroX - 80);
-        contadorVoltas.setLayoutY(centroY - 16);
-        contadorVoltas.setStyle("-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #455a64;");
-        getChildren().add(contadorVoltas);
-    }
+        // Ligação entre cada roda e a seguinte: do anel de uma ao anel da outra, com um eixo no meio
+        double y = RodaView.CENTRO_Y + DESCIDA_DA_LIGACAO;
+        double meiaLargura = RodaView.RAIO_X * Math.sqrt(1 - Math.pow(DESCIDA_DA_LIGACAO / RodaView.RAIO_Y, 2));
+        for (int i = 0; i < 2; i++) {
+            double inicioDaRoda = i * (RodaView.LARGURA + ESPACO_ENTRE_RODAS);
+            double deX = inicioDaRoda + RodaView.CENTRO_X + meiaLargura;
+            double ateX = inicioDaRoda + RodaView.LARGURA + ESPACO_ENTRE_RODAS + RodaView.CENTRO_X - meiaLargura;
 
-    /** Mostra o estado das vagas pela ordem do círculo (null = Vazio). */
-    public void mostrar(List<Veiculo> estado) {
-        for (int i = 0; i < vagas.size() && i < estado.size(); i++) {
-            vagas.get(i).mostrar(estado.get(i));
+            Line ligacao = new Line(deX, y, ateX, y);
+            ligacao.setStroke(Color.web("#90a4ae"));
+            ligacao.setStrokeWidth(6);
+
+            Circle eixo = new Circle((deX + ateX) / 2, y, 11);
+            eixo.setFill(Color.web("#78909c"));
+            eixo.setStroke(Color.WHITE);
+            eixo.setStrokeWidth(3);
+
+            getChildren().addAll(ligacao, eixo);
         }
     }
 
-    public void mostrarVoltas(int voltas) {
-        contadorVoltas.setText("Volta " + voltas);
+    /** Mostra o estado das vagas de uma roda pela ordem do círculo (null = Vazio). */
+    public void mostrar(PosicaoRoda roda, List<Veiculo> estado) {
+        rodas.get(roda).mostrar(estado);
+    }
+
+    public void mostrarVoltas(PosicaoRoda roda, int voltas) {
+        rodas.get(roda).mostrarVoltas(voltas);
     }
 }

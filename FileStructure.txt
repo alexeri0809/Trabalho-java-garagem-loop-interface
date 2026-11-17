@@ -27,6 +27,10 @@ trabalho-java-garagem
     │   │               │   └── IteradorGaragem.java
     │   │               │── loop
     │   │               │   │── GaragemLoop.java
+    │   │               │   │── Sentido.java
+    │   │               │   │── PosicaoRoda.java
+    │   │               │   │── Roda.java
+    │   │               │   │── ConjuntoRodas.java
     │   │               │   │── ListaCircular.java
     │   │               │   └── No.java
     │   │               │── Main.java
@@ -51,6 +55,7 @@ trabalho-java-garagem
     │   │                       │── FormularioVeiculo.java
     │   │                       │── ListaVeiculosView.java
     │   │                       │── PainelLoop.java
+    │   │                       │── RodaView.java
     │   │                       └── VagaView.java
     │   └── test
     │       └── java
@@ -64,6 +69,7 @@ trabalho-java-garagem
     │                   │   └── GaragemTest.java
     │                   │── loop
     │                   │   │── GaragemLoopTest.java
+    │                   │   │── ConjuntoRodasTest.java
     │                   │   └── ListaCircularTest.java
     │                   └── matricula
     │                       │── MatriculaMaritimaTest.java

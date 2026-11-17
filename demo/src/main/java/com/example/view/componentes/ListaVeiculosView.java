@@ -11,20 +11,23 @@ import javafx.scene.layout.VBox;
 import java.util.List;
 
 /**
- * Lista dos veículos que estão na garagem, com o contador "3/4" no título.
+ * Lista dos veículos de uma roda, com o nome da roda e o contador "3/4" no título.
  */
 public class ListaVeiculosView extends VBox {
 
+    private final String nome;
     private final Label titulo = new Label();
     private final ListView<Veiculo> lista = new ListView<>();
 
-    public ListaVeiculosView() {
+    /** @param nome o nome mostrado no título, por exemplo "Roda da esquerda" */
+    public ListaVeiculosView(String nome) {
         super(10);
+        this.nome = nome;
         setPadding(new Insets(20));
         setStyle("-fx-background-color: white; -fx-background-radius: 12;");
         titulo.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #263238;");
 
-        lista.setPlaceholder(new Label("Ainda não há veículos. Adiciona o primeiro à esquerda."));
+        lista.setPlaceholder(new Label("Ainda não há veículos nesta roda. Adiciona o primeiro à esquerda."));
         lista.setCellFactory(l -> new ListCell<Veiculo>() {
             @Override
             protected void updateItem(Veiculo veiculo, boolean vazio) {
@@ -46,7 +49,7 @@ public class ListaVeiculosView extends VBox {
     /** Mostra estes veículos e atualiza o contador (por exemplo "2/4"). */
     public void mostrar(List<Veiculo> veiculos, int capacidade) {
         lista.getItems().setAll(veiculos);
-        titulo.setText("Veículos na garagem (" + veiculos.size() + "/" + capacidade + ")");
+        titulo.setText(nome + " (" + veiculos.size() + "/" + capacidade + ")");
     }
 
     /** @return o veículo escolhido na lista, ou null se não houver nenhum escolhido */

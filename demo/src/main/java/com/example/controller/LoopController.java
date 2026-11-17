@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.facade.GaragemFacade;
 import com.example.loop.GaragemLoop;
+import com.example.loop.PosicaoRoda;
 import com.example.veiculo.Veiculo;
 import com.example.view.CenaLoopView;
 import javafx.animation.Animation;
@@ -9,10 +10,15 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+
 /**
- * CONTROLLER da janela 2. Dá um passo no loop (Model) a cada 0,7 segundos e manda a View
- * desenhar o resultado. O relógio é uma Timeline do JavaFX, que corre na thread da interface,
- * por isso a janela nunca fica bloqueada.
+ * CONTROLLER da janela 2. Dá um passo no conjunto das três rodas (Model) a cada 0,7 segundos e manda
+ * a View desenhar o resultado. Há um só relógio para as três rodas, e é isso que as mantém sincronizadas.
+ * O relógio é uma Timeline do JavaFX, que corre na thread da interface, por isso a janela nunca fica bloqueada.
  */
 public class LoopController {
 
@@ -24,7 +30,7 @@ public class LoopController {
     private final CenaLoopView vista;
     private final Navegacao navegacao;
     private final Timeline relogio;
-    private int voltas;
+    private final Map<PosicaoRoda, Integer> voltas = new EnumMap<>(PosicaoRoda.class);
 
     public LoopController(GaragemFacade modelo, CenaLoopView vista, Navegacao navegacao) {
         this.modelo = modelo;
@@ -43,11 +49,13 @@ public class LoopController {
 
     /** Arranca o loop a partir do estado atual do Model (o Model já tem de ter o loop iniciado). */
     public void iniciar() {
-        voltas = 0;
-        vista.mostrarVoltas(voltas);
         vista.mostrarMensagem("");
         vista.setEmPausa(false);
-        vista.mostrarVagas(modelo.vagasLoop());
+        for (PosicaoRoda roda : PosicaoRoda.values()) {
+            voltas.put(roda, 0);
+            vista.mostrarVoltas(roda, 0);
+            vista.mostrarVagas(roda, modelo.vagasLoop(roda));
+        }
         relogio.playFromStart();
     }
 
@@ -67,13 +75,21 @@ public class LoopController {
     }
 
     private void passo() {
-        GaragemLoop.Passo passo = modelo.avancarLoop();
-        vista.mostrarVagas(modelo.vagasLoop());
-        if (passo.voltaCompleta) {
-            voltas++;
-            vista.mostrarVoltas(voltas);
-            vista.mostrarMensagem("Volta " + voltas + " completa   |   Saiu: " + descrever(passo.veiculoQueSaiu)
-                    + "   |   Entrou: " + descrever(passo.veiculoQueEntrou));
+        Map<PosicaoRoda, GaragemLoop.Passo> passos = modelo.avancarRodas();
+        List<String> fimsDeVolta = new ArrayList<>();
+        for (PosicaoRoda roda : PosicaoRoda.values()) {
+            GaragemLoop.Passo passo = passos.get(roda);
+            vista.mostrarVagas(roda, modelo.vagasLoop(roda));
+            if (passo.voltaCompleta) {
+                int numero = voltas.get(roda) + 1;
+                voltas.put(roda, numero);
+                vista.mostrarVoltas(roda, numero);
+                fimsDeVolta.add(roda.getNome() + ", volta " + numero + "   |   Saiu: "
+                        + descrever(passo.veiculoQueSaiu) + "   |   Entrou: " + descrever(passo.veiculoQueEntrou));
+            }
+        }
+        if (!fimsDeVolta.isEmpty()) {
+            vista.mostrarMensagem(String.join("\n", fimsDeVolta));
         }
     }
 
