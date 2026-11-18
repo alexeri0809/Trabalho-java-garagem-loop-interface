@@ -1,142 +1,817 @@
 trabalho-java-garagem
-└── demo
-    │── manuais
-    │   │── Manual_Tecnico.md
-    │   └── Manual_Utilizador.md
-    │── pom.xml
-    │── src
-    │   │── main
-    │   │   └── java
-    │   │       └── com
-    │   │           └── example
-    │   │               │── App.java
-    │   │               │── controller
-    │   │               │   │── GaragemController.java
-    │   │               │   │── LoopController.java
-    │   │               │   └── Navegacao.java
-    │   │               │── fabrica
-    │   │               │   │── BarcoFactory.java
-    │   │               │   │── CarroFactory.java
-    │   │               │   │── MotaFactory.java
-    │   │               │   └── VeiculoFactory.java
-    │   │               │── facade
-    │   │               │   └── GaragemFacade.java
-    │   │               │── garagem
-    │   │               │   │── Garagem.java
-    │   │               │   │── GrupoVeiculos.java
-    │   │               │   └── IteradorGaragem.java
-    │   │               │── loop
-    │   │               │   │── GaragemLoop.java
-    │   │               │   │── Sentido.java
-    │   │               │   │── PosicaoRoda.java
-    │   │               │   │── Roda.java
-    │   │               │   │── ConjuntoRodas.java
-    │   │               │   │── ListaCircular.java
-    │   │               │   └── No.java
-    │   │               │── Main.java
-    │   │               │── matricula
-    │   │               │   │── EstrategiaMatricula.java
-    │   │               │   │── Matricula.java
-    │   │               │   │── MatriculaMaritima.java
-    │   │               │   └── MatriculaTerrestre.java
-    │   │               │── veiculo
-    │   │               │   │── Barco.java
-    │   │               │   │── Carro.java
-    │   │               │   │── ElementoGaragem.java
-    │   │               │   │── Mota.java
-    │   │               │   │── TipoVeiculo.java
-    │   │               │   └── Veiculo.java
-    │   │               └── view
-    │   │                   │── CenaGaragemView.java
-    │   │                   │── CenaLoopView.java
-    │   │                   └── componentes
-    │   │                       │── BotaoVisual.java
-    │   │                       │── CampoRotulado.java
-    │   │                       │── FormularioVeiculo.java
-    │   │                       │── ListaVeiculosView.java
-    │   │                       │── PainelLoop.java
-    │   │                       │── RodaView.java
-    │   │                       └── VagaView.java
-    │   └── test
-    │       └── java
-    │           └── com
-    │               └── example
-    │                   │── fabrica
-    │                   │   └── VeiculoFactoryTest.java
-    │                   │── facade
-    │                   │   └── GaragemFacadeTest.java
-    │                   │── garagem
-    │                   │   └── GaragemTest.java
-    │                   │── loop
-    │                   │   │── GaragemLoopTest.java
-    │                   │   │── ConjuntoRodasTest.java
-    │                   │   └── ListaCircularTest.java
-    │                   └── matricula
-    │                       │── MatriculaMaritimaTest.java
-    │                       └── MatriculaTerrestreTest.java
-    └── target
-        │── classes
-        │   └── com
-        │       └── example
-        │           │── App.class
-        │           │── controller
-        │           │   │── GaragemController.class
-        │           │   │── LoopController.class
-        │           │   └── Navegacao.class
-        │           │── fabrica
-        │           │   │── BarcoFactory.class
-        │           │   │── CarroFactory.class
-        │           │   │── MotaFactory.class
-        │           │   └── VeiculoFactory.class
-        │           │── facade
-        │           │   └── GaragemFacade.class
-        │           │── garagem
-        │           │   │── Garagem.class
-        │           │   │── GrupoVeiculos.class
-        │           │   └── IteradorGaragem.class
-        │           │── loop
-        │           │   │── GaragemLoop$Passo.class
-        │           │   │── GaragemLoop.class
-        │           │   │── ListaCircular.class
-        │           │   └── No.class
-        │           │── Main.class
-        │           │── matricula
-        │           │   │── EstrategiaMatricula.class
-        │           │   │── Matricula.class
-        │           │   │── MatriculaMaritima.class
-        │           │   └── MatriculaTerrestre.class
-        │           │── veiculo
-        │           │   │── Barco.class
-        │           │   │── Carro.class
-        │           │   │── ElementoGaragem.class
-        │           │   │── Mota.class
-        │           │   │── TipoVeiculo.class
-        │           │   └── Veiculo.class
-        │           └── view
-        │               │── CenaGaragemView.class
-        │               │── CenaLoopView.class
-        │               └── componentes
-        │                   │── BotaoVisual$Estilo.class
-        │                   │── BotaoVisual.class
-        │                   │── CampoRotulado.class
-        │                   │── FormularioVeiculo$1.class
-        │                   │── FormularioVeiculo.class
-        │                   │── ListaVeiculosView$1.class
-        │                   │── ListaVeiculosView.class
-        │                   │── PainelLoop.class
-        │                   └── VagaView.class
-        └── test-classes
-            └── com
-                └── example
-                    │── fabrica
-                    │   └── VeiculoFactoryTest.class
-                    │── facade
-                    │   └── GaragemFacadeTest.class
-                    │── garagem
-                    │   └── GaragemTest.class
-                    │── loop
-                    │   │── GaragemLoopTest.class
-                    │   └── ListaCircularTest.class
-                    └── matricula
-                        │── MatriculaMaritimaTest.class
-                        └── MatriculaTerrestreTest.class
+│── .git
+│   │── COMMIT_EDITMSG
+│   │── config
+│   │── description
+│   │── HEAD
+│   │── hooks
+│   │   │── applypatch-msg.sample
+│   │   │── commit-msg.sample
+│   │   │── fsmonitor-watchman.sample
+│   │   │── post-update.sample
+│   │   │── pre-applypatch.sample
+│   │   │── pre-commit.sample
+│   │   │── pre-merge-commit.sample
+│   │   │── pre-push.sample
+│   │   │── pre-rebase.sample
+│   │   │── pre-receive.sample
+│   │   │── prepare-commit-msg.sample
+│   │   │── push-to-checkout.sample
+│   │   │── sendemail-validate.sample
+│   │   └── update.sample
+│   │── index
+│   │── info
+│   │   └── exclude
+│   │── logs
+│   │   │── HEAD
+│   │   └── refs
+│   │       │── heads
+│   │       │   └── main
+│   │       └── remotes
+│   │           └── origin
+│   │               └── main
+│   │── objects
+│   │   │── 00
+│   │   │   └── c5f32159a6cf4be2c2c1a9a85b595202cf4292
+│   │   │── 01
+│   │   │   └── 8fc3435a57a3496ac1489bb1b02113076dd9cc
+│   │   │── 02
+│   │   │   └── 4941f35005dbf9996c66320ef835271cfe8189
+│   │   │── 04
+│   │   │   └── 7bad37fef1b2ae50a9a7227583231900b47733
+│   │   │── 05
+│   │   │   └── de657447814826162a4d83ffdd83b29b4bd1b9
+│   │   │── 07
+│   │   │   │── b23506fac6340f01934a5d24a65857797f1ba4
+│   │   │   └── fb55b06f91440eeceedfde9c27790242b60ae9
+│   │   │── 09
+│   │   │   │── 667c1a6889ae65cfedd961be474f137b47cd92
+│   │   │   └── ff4498f3b0e5039900c4343147b26ed7aa6afe
+│   │   │── 0a
+│   │   │   │── 30d92a97b56d2978458bf4706683781d5b6696
+│   │   │   └── 3e5db8088749d60402b676726f907e6f9e7116
+│   │   │── 0b
+│   │   │   │── cb27a4943e9c0ff247aea8a5d8fe20a61cea5d
+│   │   │   └── d80261c0995fd1853ece0eb629b0675a801a62
+│   │   │── 0c
+│   │   │   └── 4258e53974932b2d8aea38dccfdee4b19f4946
+│   │   │── 0e
+│   │   │   │── 172ff09a10ef2c92735070a8e2368dde163b9b
+│   │   │   │── 1c4adc7cf45c0348d36e54ab4a6feb7d8a9299
+│   │   │   │── 27ae65ecea22cbfa8df345873f166ad89e00c6
+│   │   │   │── 3bd3c601269764a2d1731fdc797255c656eb09
+│   │   │   │── 49353b642c228acae20202cf38367ab00a90c7
+│   │   │   └── 8d99756da0d28d4672b14b18048441491d7a7b
+│   │   │── 0f
+│   │   │   └── 6faeb28141d72da12b3a6099c70ea99712b318
+│   │   │── 10
+│   │   │   │── 7dbe592728ab8795fea0214484029960ca2519
+│   │   │   └── daa2ec5aa2a01f44dcb1a6141c42894df6616d
+│   │   │── 11
+│   │   │   └── cbb0f393a052be2acff5f8183fbf2e68403e92
+│   │   │── 13
+│   │   │   │── 1b5e8928f46447c49632ba8172fef10aec740a
+│   │   │   │── 3e2049193b500d3758eb19c5a4f155b765de52
+│   │   │   └── cf42cbfeaafa5212686a64792dd248eaf763fe
+│   │   │── 14
+│   │   │   │── 119c1ff752b20777313a7625b6d5682a977e15
+│   │   │   └── e33861d007e411c227a0e96e01ebcec4e915bd
+│   │   │── 15
+│   │   │   │── 418a4ae14fcd9104c12ff4ac75ec015ae2395c
+│   │   │   │── a62bdef6d5ad5cb323ed30bd54cdafb4a5e78c
+│   │   │   └── a6b7437a7c889c0a51b6f2a43738aaf1a48f8d
+│   │   │── 16
+│   │   │   │── 1baa1f752d3f431048c31db30af2cfbdd011f2
+│   │   │   └── 88975c3ef7dfc6c02e97816a50255dfb94032c
+│   │   │── 17
+│   │   │   │── 21d8a38fd8d399fa1f5fc709f30808fb9e061b
+│   │   │   └── 951801a96ee266b70e79e2ae28b467bc83ab86
+│   │   │── 18
+│   │   │   └── 20d184bd5834aff7403998fbad6e7a59f6bd99
+│   │   │── 19
+│   │   │   └── cada15907b45db6452e5f8ffb7255f6790c0ef
+│   │   │── 1a
+│   │   │   │── 14c26e1d54ab9d0df4b057e99b1b765d297778
+│   │   │   │── 93c582599e10c601547fb1a8d568722b10984f
+│   │   │   └── b0ad9c96c2e506b968a19c230f7a11314b3f5c
+│   │   │── 1e
+│   │   │   │── 3f9bdc3c4bd4f43ce8502f40491c17bc972179
+│   │   │   └── 782b6e5118916f045b55e8fec25af6ee9d2016
+│   │   │── 1f
+│   │   │   └── c9e345148e841b2bfb1865905c4461f6660148
+│   │   │── 21
+│   │   │   │── 45db9867af02a9a3c2db4cbed673a5afd3b087
+│   │   │   │── 9a1b151a997c201695ae7fcd78957d7290fdf2
+│   │   │   │── c108ab6b128e6aa6407758b566ed171e030bd5
+│   │   │   └── cb510ac8de3e1afd8b4ce211dfc3917f245c0d
+│   │   │── 22
+│   │   │   │── 244df65f40809c9ebed0a36b4d1a4c8dff7931
+│   │   │   │── d764babd46804ea3e1491ddc419dbfb2683a94
+│   │   │   └── e51dba2a9d3581bdc16c3e5d712c50bee0de6f
+│   │   │── 23
+│   │   │   └── cb61ba130af49720767ebe2609326c71d27bff
+│   │   │── 25
+│   │   │   │── 8e9ce78ca79945096a65bb05f0675b3ae5f58f
+│   │   │   └── 9165ffb0c4116058b457ba03d438b3e2378e5b
+│   │   │── 26
+│   │   │   │── 42e652d74dd4ba968e3fabd6e2c42603940b18
+│   │   │   │── 6cbeb9d0106bac46fead7d17b7e6c16b2568e1
+│   │   │   └── 90d2f2ce1989ce00c21cbcc68e2890a745aa0b
+│   │   │── 27
+│   │   │   └── 0215358b5a89a98ef5d88ef219a83a61eb6443
+│   │   │── 2b
+│   │   │   │── 0ddc81a6cd01ecbfd1c6d469630e8c477c17ae
+│   │   │   │── 11b514a73bc1f8a5597ba06b2edc0ec2522e71
+│   │   │   └── b3dbac6f8cebf784cdd022c77a3ac936cf128d
+│   │   │── 2c
+│   │   │   │── 16e3c08fd43b04b7085f4490d980a924b0c575
+│   │   │   │── 17beb72ee080e356d0ca4556c724a6d4494862
+│   │   │   └── 7342c21f62c6dfea51413e3120230c3992dc50
+│   │   │── 2d
+│   │   │   │── 93dd807ffefad616bde13ffbfd3e7e64706ddc
+│   │   │   │── a541037feb9eaf40aca2c63feb6bd3fff6b78a
+│   │   │   └── c3f9c93c2362117be7f92cc642708d07ace025
+│   │   │── 2e
+│   │   │   └── dad7522a41c7d821e63f80b614df6826e502bf
+│   │   │── 2f
+│   │   │   │── 6484f4638b02123acf698ba07b0035240e41f9
+│   │   │   │── 914cf63d4adcaa0ef9da8634fd2138dda7ee78
+│   │   │   │── 95114fb062f952ddcf36942f4c6470344ef6d8
+│   │   │   └── e199f5b4a34548718bba8a54515662d003e96f
+│   │   │── 31
+│   │   │   └── c87a440a4d4ced4d8de7e3a298505f6616d13f
+│   │   │── 32
+│   │   │   │── 0cceb79311ca64875e0ce3e29bababc789a1ee
+│   │   │   │── 3629c901b5b6a62b20924f8c9d1e624659ace7
+│   │   │   │── 846606ef5750055c18397f83a2bc2d502ce29f
+│   │   │   └── f3a21ab4db63be94f2297493020bdadb8a1c7a
+│   │   │── 33
+│   │   │   │── 4366260da19798acf2b502a289b3c3c456c2a0
+│   │   │   │── 73a71586c7e739449082bed5c2ac8e244fbd0f
+│   │   │   │── 8ef22d7b6b710470eb3d7c77cae38d61b4e7c7
+│   │   │   └── ad1cab3de2abf366fccb8e5298d85f691eed59
+│   │   │── 34
+│   │   │   │── 07cf2c4adebbf5bdd49e78a07777b28d67adfe
+│   │   │   │── 4f074ec6acb115f948b5eff7ad938ddba0e9d0
+│   │   │   └── f7172f74ce0115ad51ac3f99a28724cbee83e9
+│   │   │── 35
+│   │   │   └── 2144dea71c15f56ccc65c39a60894a69481ce3
+│   │   │── 36
+│   │   │   └── cbb7f800e6ee66875ea55dc57eac6fc135fe80
+│   │   │── 37
+│   │   │   └── 729dc49d00b8be61934cb845a619bf0389bdb3
+│   │   │── 38
+│   │   │   └── 8475a1ff7b7186337541e319963215f0d05f7f
+│   │   │── 39
+│   │   │   └── 4dc9d78c007d5ff9d46023da5f2e04c56e1055
+│   │   │── 3a
+│   │   │   │── 28bc07204803f76c78bf921c8d1ea280c2e814
+│   │   │   │── 43caf37eeccb23306652dd5e1956f264421608
+│   │   │   │── ac944e5c66d668e9dbba9487e1c88f3805c41f
+│   │   │   └── df99eedf5027765f302c95ddd2c93ec32af3ac
+│   │   │── 3b
+│   │   │   │── 2cde842e0fb9812ec68e4f519cdeb703e0952b
+│   │   │   │── a5db07777110bccd449f5b98c464c5eee7d6da
+│   │   │   └── af2217654a77b5da0b6fde1d72caad67cd231b
+│   │   │── 3c
+│   │   │   └── e104c5f58be1636b53af7fa8917d34068ab7bf
+│   │   │── 3e
+│   │   │   │── 810cb3789b25d603800c38c1e6d3bc390d1f95
+│   │   │   └── c900b34f377060c2f8edad6f98a84405628ee2
+│   │   │── 40
+│   │   │   └── e04a97f05069c89d88f8c0e8d2ad15bb449ca1
+│   │   │── 41
+│   │   │   └── a79b527129228eb06b6493dd0b40b1527c514c
+│   │   │── 42
+│   │   │   │── 7489c82ea2cf4cd1b75c5363c743593a7d62d2
+│   │   │   └── faa1a74a369aa1d18bbdded7c658e317f338a9
+│   │   │── 43
+│   │   │   └── c08c446bc49217f2de3cd856c958f11ece24c8
+│   │   │── 45
+│   │   │   │── 0478e6f109281421e7c8e39dfaa8cda3670fbb
+│   │   │   │── d8bd13f78f55efa74dc5b6f2d9327ab9ade8c4
+│   │   │   └── fa2959fc5d8b8fb326a08aa2670773fa51ad42
+│   │   │── 46
+│   │   │   └── 6b617327530d11abb02e330326d64d58497890
+│   │   │── 47
+│   │   │   │── 159f1f852bb8f0c5ce3d606b43741cec8990b0
+│   │   │   └── 593b554ea9514098c9d4c72163291985830356
+│   │   │── 48
+│   │   │   └── d23d605d8852713df962ad8b96b7e2a4714f82
+│   │   │── 49
+│   │   │   │── 55ddbaec38c611f2e1f1470f9421dd4a16b87e
+│   │   │   └── 9cee5fd149682c7643023f23a64157bd9755c4
+│   │   │── 4a
+│   │   │   │── 283c0eec2cf1aa37f104270d0ee3f69cb948d5
+│   │   │   └── 3aaab16a0fb2e5ee2f34c390a4ebb73167480b
+│   │   │── 4b
+│   │   │   │── 2dc19af536b447f56aefa1662f971f3be1eb3d
+│   │   │   │── 319260f9a18f6ca9b5f27e6496df5f9aba1544
+│   │   │   │── 8f1c0dba9cdabce2dc4aa5503a7551a9d87230
+│   │   │   │── a3ed823acdb65a80a897633ec24bb08b41c776
+│   │   │   └── d5ad8fb0f8382170b8539eed37a141f10fab0b
+│   │   │── 4d
+│   │   │   │── 2370a7d01c5411f93cc8b4dddb5a52ff4aad76
+│   │   │   └── 4d9d233161f959b50c9820b0e5c79876e31659
+│   │   │── 4e
+│   │   │   │── 59421edd80eb44fb96e9f9281d1d5806b059d4
+│   │   │   └── 70cf9538e83792f6dc23a84d8d8eb083193502
+│   │   │── 50
+│   │   │   └── 34d975f9377bffc1eafa9993c5e0f37eaf7a79
+│   │   │── 51
+│   │   │   └── 047cd54e4f6f9d5637b3fdd67647a663cdd4a4
+│   │   │── 52
+│   │   │   └── 764ced03ecbb4c4bc0d33c5ddfaebe5a7ba540
+│   │   │── 53
+│   │   │   │── 00b3b1453f71439c6af08d885add6cc53b9c73
+│   │   │   └── 5b0f1eada9e48644639a1ff5afb1a6125bacfd
+│   │   │── 54
+│   │   │   └── 04ff53c80dd70fbeeaad50a1f3521c065e6feb
+│   │   │── 56
+│   │   │   │── 423c7e9504384a7dfcc6ee15dbf25d9f818f99
+│   │   │   └── ccbc8fc3323d039f49562ebd7498947e1212ba
+│   │   │── 58
+│   │   │   │── 180dc30f08c455980ed98ace26974cf5971d82
+│   │   │   └── e613ccfc292519300fedec28e7fa93491626ae
+│   │   │── 59
+│   │   │   └── 3b81f1954537f4ee5188fe672cdf4844d52e21
+│   │   │── 5a
+│   │   │   │── 5c709e473921cca46bae47c1da1261eee7bf53
+│   │   │   └── 5e0c3281c2651a0935ed1c1d2f4a762f7945f3
+│   │   │── 5b
+│   │   │   │── 9a3b2a730d9275989622b2d7ac86d9a5568663
+│   │   │   │── edeff98b274c362e5e0945bfe5cf9140af63c8
+│   │   │   └── eebf39cb0f9d733384b31cac1e9b3223641712
+│   │   │── 5c
+│   │   │   │── 420352ae8b41d7ff3d9a897a31fe3e235c1290
+│   │   │   └── 76f8d7ede0327a5a939c3e3268d7cb014e33ba
+│   │   │── 5d
+│   │   │   └── e58fb5429f00ec68e5911e469c79f7db1c71e3
+│   │   │── 5e
+│   │   │   └── e5bbc86f6f143878b29fbdfc97217fb601d300
+│   │   │── 5f
+│   │   │   │── 431e5692888c4e8dbb0c45e8a543abb331ebf3
+│   │   │   │── d646f441ca88f8b609e9d6220e63f3882e8534
+│   │   │   └── ef8f3d4a8d40e3083e69963aa2a024495c77ba
+│   │   │── 60
+│   │   │   └── 293bcf81de24a28c5bc2dda94eb49a18f2e6f4
+│   │   │── 61
+│   │   │   └── 9853ff39cccb5e1edde81834d1a37497fb982a
+│   │   │── 62
+│   │   │   └── 1a8499bed305464cee7b24da9107fdf883eb87
+│   │   │── 63
+│   │   │   │── 9206053ba3345f3fd63ac9db21d2b7f80afb2c
+│   │   │   └── bdcf90bd2c42cf12a7df9d32c10fbed08b3c9c
+│   │   │── 66
+│   │   │   │── 376e66770e6c4705281c48dadbc3d332e3e3c0
+│   │   │   │── 4ee692468cb49a5d6d01c47146fb4887e3d9ab
+│   │   │   └── dfd853414778e423334c414cb597807bdef4af
+│   │   │── 67
+│   │   │   └── bcf3d0766390c622e952b0883ec11ce33397bf
+│   │   │── 68
+│   │   │   │── 02a821f1a9939f99cc7680b9e80d2206d47d95
+│   │   │   └── e4efa06abdfddc6a9bef7e67c31317766642ef
+│   │   │── 69
+│   │   │   └── 180507bae7f28a91fe052d1f036e460ef7dd68
+│   │   │── 6a
+│   │   │   │── 0a488ea261936119ca71808a8eadd9906bf01b
+│   │   │   └── fc4f51709682b203f191e5ef239f8979c96327
+│   │   │── 6b
+│   │   │   └── f6b74f778410ea45a0b63347b748ca17a8c510
+│   │   │── 6c
+│   │   │   │── 20d7779700b377b9060891b791ecda36777da4
+│   │   │   │── 776ce337342e3eb26558aa32443cd41d0606f5
+│   │   │   └── d032c70ac4905c25d57332eebbdfce33989bad
+│   │   │── 6e
+│   │   │   └── 75d0d2eb85e292cd6e7cb826795004842664db
+│   │   │── 6f
+│   │   │   └── 5c2675004051fcf0b73751528d7a07b5c27dbe
+│   │   │── 70
+│   │   │   └── 136af87d4c52acc01d7ede86898e4718c1d604
+│   │   │── 71
+│   │   │   │── 1fadfdee7c4ae2caac6c07d0a2f4bc78c30259
+│   │   │   └── 2126a860d5f93bc103960d947c508212b674f8
+│   │   │── 73
+│   │   │   └── 92fd7fb8a0abe46caf095ca6c5883e0eb2b76d
+│   │   │── 74
+│   │   │   │── 4cd083360c714709d5c219a916af45ba250e66
+│   │   │   └── 7077e91fdf377ecaaef41e9ac7ac9478fab74c
+│   │   │── 75
+│   │   │   │── 08989b3f5c3d6693894b68026e28de3ed27cb8
+│   │   │   │── 871df568cc586ba48906717600cbf2c9270b27
+│   │   │   └── a86780a44c75c0d29f413521923d940169e373
+│   │   │── 76
+│   │   │   └── c2c670e66898e0e06816a866bb1b94ab4c4156
+│   │   │── 77
+│   │   │   │── 51b983319a38f28cf3034992612a8da542d6d1
+│   │   │   │── 768fbdac5018d238b64c6b0b6e00960464b61f
+│   │   │   │── 89bfd5aa899099c944e4e9cb44a2a8cfabb051
+│   │   │   └── fbc42b6aded7a867979cf576e1613c30c45046
+│   │   │── 78
+│   │   │   └── a82c76d9adfa4546ca151dfc9be77725433b97
+│   │   │── 7b
+│   │   │   └── 85ca0b4a47df76be068241357cbcdb3564455c
+│   │   │── 7d
+│   │   │   └── c642ca189238e4f71eb0c888090c592cc9966c
+│   │   │── 7e
+│   │   │   └── 567b5de15c671425860ee7cc65cc2ae4fe5e5a
+│   │   │── 7f
+│   │   │   └── 4df589c2d7533f03372007e2f48ac895c76793
+│   │   │── 80
+│   │   │   └── 6123ced743ea15a51a1f06c8c8bff8cc8cd266
+│   │   │── 81
+│   │   │   │── a10d29e57ae3c32dc9778d035091e49b8b758e
+│   │   │   └── ea341d1ea1760d58661adda86f95d9ec8003fb
+│   │   │── 82
+│   │   │   │── 34d112944b8326145438d7365edf58feaa3aea
+│   │   │   │── 803f3333bba5b9f813f1b141f57e667c566668
+│   │   │   └── b109bcc0143a0be8419847ddc8b0c839670ef7
+│   │   │── 83
+│   │   │   └── b7ed7816878f5710f34c9c5d21cc40a953c820
+│   │   │── 84
+│   │   │   │── 59b876e2883f82e9b8165ac94235a962a853dd
+│   │   │   └── a3fd0e5729b6cfde471bc621f244a437155479
+│   │   │── 85
+│   │   │   └── 3df19a59abd5c311264be3618790dc9458d385
+│   │   │── 86
+│   │   │   └── 9f4b9d3f8352f2bcc44c9d435b3855c979ed5c
+│   │   │── 88
+│   │   │   │── 05890512ebfcda49ec0043da5bcb7b77e42526
+│   │   │   └── dc5abfbb2ca2b01ff7070b5af33e6514e49602
+│   │   │── 89
+│   │   │   │── 4e6c76997ae508a876ae40d0ff6955065ea7df
+│   │   │   └── f9495f4bd82d8e6cbfedad80bfe0704356c6b6
+│   │   │── 8a
+│   │   │   │── 1739567c2e45861ec504ff1f82bd3b7d9e34b6
+│   │   │   └── 3cb8b791ab0e13d2d561872a70d50f9b829a4a
+│   │   │── 8b
+│   │   │   │── 40e0ef0abd85821571299ab57a94bfb84085ae
+│   │   │   └── 748cca7090540dbb64d771853d383fa1403e95
+│   │   │── 8c
+│   │   │   │── 6b48f723343d319017a6d99f4cbbf269170086
+│   │   │   │── d884baed3186fca1e702f5467232ea6a687640
+│   │   │   └── ee4c4548c900da49b1837ad0f289b9db11beb6
+│   │   │── 8d
+│   │   │   │── 26b65e885a4f40f96174d8d972390d1d9f7b69
+│   │   │   └── d8e55684dfe5c2eb1b078796659c98ed73e492
+│   │   │── 8e
+│   │   │   │── 8882ffd0e2608aaf184562e327f9cda870c57d
+│   │   │   └── d8dea78f0c098bfb004526d9dd1cc759b49348
+│   │   │── 8f
+│   │   │   │── 0c50883b841250718031e33baa58d8c4992597
+│   │   │   │── 51128219018b5355215136b34bb40911b0191c
+│   │   │   │── 8a9f079acde6b44f065ce8a4069ebe42af758c
+│   │   │   └── c4aa45b47b9a05548f22ddff8af0f0e7a495f0
+│   │   │── 90
+│   │   │   │── 5ab84bfd102f379f026e11713fac2f78998fe1
+│   │   │   └── 7480a544a83a15cd5a7d4e6aa61a25bb062bee
+│   │   │── 92
+│   │   │   └── f1855c9ea4901ac00715dafbe7951cb5282551
+│   │   │── 93
+│   │   │   └── 47020cb6694b35cb9b798f9cecde96fcbbe81f
+│   │   │── 94
+│   │   │   │── 4ae1f9e569196728630591460d008c1865ac84
+│   │   │   │── 55ff60d2de0ca5f4c3dad29a065b1856c62634
+│   │   │   └── c7fdaf88fead95a3b0aa81547b13e8ccb60c2b
+│   │   │── 95
+│   │   │   └── e1d951e7b7692bf88e542ae55d5b7b31c7b748
+│   │   │── 97
+│   │   │   └── f961fabfee8732e5ac671b61f9d8598ffc5c6f
+│   │   │── 98
+│   │   │   │── 41123ea6577ce9101d37fcc10c09eeac3c51d1
+│   │   │   └── 636c8967a4df86d0ce6c9fd0e1019cb8cf0119
+│   │   │── 99
+│   │   │   └── 2c6d7aa88c445a368b3a7cb0d8c2c807fb1dc2
+│   │   │── 9a
+│   │   │   └── 1185243e5eb941e7c1bf7d9baa5e7ea0d352b9
+│   │   │── 9b
+│   │   │   │── f025fd92443c7155dfe63fd87ab1d917a14810
+│   │   │   └── f8a1b6f60da210fc930c24372ddc42c867c291
+│   │   │── 9c
+│   │   │   └── d47d6bacdd5b8b6252723d4032b717087001cb
+│   │   │── 9d
+│   │   │   │── 8bc4faa5aaf58a08bdcc259d2756d1d0705bed
+│   │   │   └── da8e93ff8c32eb6fb6ae0e1570f1b1ca306b92
+│   │   │── 9f
+│   │   │   └── 152e3c1528058987b44244c3a4aad1d6f2aee1
+│   │   │── a0
+│   │   │   │── 5482f1f29ac8b8c212e38322193d9112ca64ec
+│   │   │   │── 8cc2add542e9cb76fdabbfb03bf08506a43dd6
+│   │   │   └── bae2aa2feb31c56c0ba33e9fa3488c325e73ed
+│   │   │── a1
+│   │   │   │── 9b941f3401303bd1a3dfc265b642b120ed9bb8
+│   │   │   └── c4b89d6910f0682f5d89bf86b36164b5b8d5fe
+│   │   │── a2
+│   │   │   │── 2fd827109933393c7f7a7c1176e598e0168bfc
+│   │   │   │── b0312c534ed16c50be3d2d0060daa1fe6d2b09
+│   │   │   └── c802e271d28ed366f89b0e7967c732bd46d95a
+│   │   │── a3
+│   │   │   │── 95e20f8e73c32b2596bded11b1ab8af8a32a90
+│   │   │   │── ab228206cd104db5907037c6c61097cdf788a8
+│   │   │   │── f60f4b6c91b506109f40011fa4140cabd0ab44
+│   │   │   └── f7cc5b6771cc299843b1a9a79f9baa157ad118
+│   │   │── a4
+│   │   │   │── 647e4cad9dee6fdd966dcafaa4e5972473f354
+│   │   │   └── 70f3a47301a69abca5397d1d3aa388f20bdf1d
+│   │   │── a5
+│   │   │   └── 878e74c6e8d7e070750b56896b6c01e8e4df61
+│   │   │── a6
+│   │   │   └── 7dfa46b2397e8e53b2b54c0a678dc44f64518f
+│   │   │── a7
+│   │   │   │── aca5830d2de67b19a72c3e46cbc8439b981767
+│   │   │   └── f8e4839fde3532a61d08cdd89b04ceca6925fe
+│   │   │── a8
+│   │   │   │── 3cc105d6f07e40df39c0d9b7bab3984ad6352d
+│   │   │   └── 474f169eff9460d986516097e6f012848efe59
+│   │   │── aa
+│   │   │   └── d7a67387e14a779e03dc38d7e85a2d6bdcd228
+│   │   │── ab
+│   │   │   └── 08be83fc3d5592904b3957a46bd217f1bd5d06
+│   │   │── ac
+│   │   │   └── 33f8ed570268b50ccaa09f45a2ef21eaa3b89a
+│   │   │── ae
+│   │   │   └── d36cd217beaadebf0f99a62e37baa8976ee793
+│   │   │── af
+│   │   │   └── 36dc72a2aa9150dcb5ac84babeab5b5d26c08c
+│   │   │── b0
+│   │   │   │── 0d282c870b4d36529e180367500c6aea4b66b6
+│   │   │   └── 1878110469cdc2aa0a03c99950de2aef74ab5b
+│   │   │── b1
+│   │   │   │── 0d9f85e91844ee4ff57a0cc978a0f1352c8052
+│   │   │   └── 759a904d07697e96ec54710862efa80de8042a
+│   │   │── b2
+│   │   │   └── 644a93e01c7e66e23c047a6a127a7cf98b02d7
+│   │   │── b4
+│   │   │   └── 570a1e93ca652301725081dbf07484e49867b5
+│   │   │── b5
+│   │   │   │── 031dcbb1fd28e045b4836fdd25ea5225128ada
+│   │   │   └── 56e949fc4c6a1c398a7391077db61d5e5a6e1b
+│   │   │── b8
+│   │   │   │── 05a63cce61be717f592a9e786d144eb5749ab6
+│   │   │   │── 0fe500a2504221e8848a32d310f37ddadf2286
+│   │   │   └── 39c755ab9a8e9a5d9ad04319772cc373a337ee
+│   │   │── b9
+│   │   │   └── c22f8dd5cb0607b8a4d380b5d9ee844526867f
+│   │   │── ba
+│   │   │   └── 4b4540fad07a22183ed5dba169862102c5488c
+│   │   │── bc
+│   │   │   │── 7c4034c91ebf88b09f94af9f75ad16cf33756e
+│   │   │   └── a29f648b9cc29fa8d81c13def01d1e80bde55f
+│   │   │── bd
+│   │   │   │── 6283f8bd8cc5eab8347be375cdc6a299a66eec
+│   │   │   └── 83cc33a0a6b4e994bd15fa51ecd332128083e3
+│   │   │── be
+│   │   │   │── 1aebb189f526c36e7ecff6ef1e5e404f07d00f
+│   │   │   │── 4bbc2c69b6634847167b5b361bbcce5d3a8760
+│   │   │   │── 6b4fd961ebd4300c912f72a84c00c8eeb7e1a5
+│   │   │   └── ea8c2aea9ed35cef0abbde01a268472f751161
+│   │   │── c0
+│   │   │   │── c426936f0ec7d739184940522674302e97c8cb
+│   │   │   └── dc99f55b37a08a6337b6276bec87655eff6e26
+│   │   │── c1
+│   │   │   └── 8da0daf559e231ae51933df38b01045bdcd121
+│   │   │── c2
+│   │   │   └── 5841ccb0254e4952fcfa0e464e515879aa1600
+│   │   │── c3
+│   │   │   │── b408d48e6260255c812122eaa5f2690c853336
+│   │   │   └── cd8d5f8d8421fb59c33a15fa3d559063240dca
+│   │   │── c4
+│   │   │   └── 75ca6ac9c5e3e549ec8cf596dc14b3cc839fc4
+│   │   │── c6
+│   │   │   │── 28dfd94a356d5fd4d120e43642444d0c382841
+│   │   │   │── 2a7c1c35e04415b6c65800cc06c060ecb291ec
+│   │   │   │── 8b5458e42d494757eb51333c36e1a50f9525d6
+│   │   │   └── bfbb944ea2c83e774d90aff92afe172fe19b42
+│   │   │── c7
+│   │   │   └── 57b2bae7fafff405c9c4a373d3b4f2d8031116
+│   │   │── c8
+│   │   │   └── cf778e67b87934231b94956309b4cc6901518a
+│   │   │── c9
+│   │   │   │── 35cb2189ef7a30481bffcb2dafa330c2f9ed75
+│   │   │   └── c4fe74f16f552af82fcfca512d1d93da462e1d
+│   │   │── ca
+│   │   │   └── 2ebe9e3c1a171a083979ce81e627761cdcd24e
+│   │   │── cb
+│   │   │   └── 6c84e9eaf46a6b7a4a747646d25ffaca481e94
+│   │   │── cc
+│   │   │   │── 61fdaadc34c450667a4db60d5cde2c86e7d709
+│   │   │   └── f0c2c8d426976b661b9a5a3f1c4892ba9ac626
+│   │   │── cd
+│   │   │   │── 384c2c8fea23da37c976ae37acc1dd76952f44
+│   │   │   │── 69f360cb7afcd3a8ebaa8802f65d5cbaf4acfc
+│   │   │   └── e38acc76d8ac15a8e3d723887e7e6238fce648
+│   │   │── ce
+│   │   │   └── fb7ab7f7cf3804082ff5a7fa4aba792f6368f0
+│   │   │── cf
+│   │   │   │── a66929f73d47429dc639cc3b4407f9658d26f7
+│   │   │   └── b6bd64afa098d6dc04876e801bea06110f52a1
+│   │   │── d0
+│   │   │   │── 2a5ba90a5ac0bf56ba4faecb99c74076069b7b
+│   │   │   └── cc0b783f9ff46fb81249126cec4289629d192e
+│   │   │── d2
+│   │   │   │── 65497c79de1a6e9de9c246cc5b9e316c590957
+│   │   │   │── 836cb9134f424a209689a6e509672de2236d92
+│   │   │   └── c43a1e7e242441aacbefaad4f232fd99b2b5a2
+│   │   │── d3
+│   │   │   └── f0ba0169012c9fd28349a1f348a56da9406b4e
+│   │   │── d4
+│   │   │   └── e8a3f1d7c98ee2b986661aa6f46886e897a36f
+│   │   │── d5
+│   │   │   │── c35562106e7b6232b289c483bee61081185939
+│   │   │   └── d4716439d97470d997cc98d042fb2265543966
+│   │   │── d6
+│   │   │   │── 209a5662ad7f676fea650d33513020813ff436
+│   │   │   │── d2de70145ed820a4a5433ffa4e159a330aaa60
+│   │   │   └── ecfbb5491c589de6924528b4ce33132ff24a5a
+│   │   │── d7
+│   │   │   └── e321b089af09102abd69902775c5a4495aaf4e
+│   │   │── d8
+│   │   │   │── 350f3e494f554266ec9143e0f6e015abb7b97c
+│   │   │   └── d76942b4defa95d0fd7fcb5b7e6117f0f098d3
+│   │   │── da
+│   │   │   │── 390b9e5ce774f5ee68e1dba0c3f5c3dcb4800b
+│   │   │   └── 48da061f8130233ce0bf3fa216a6d4a43fd52b
+│   │   │── db
+│   │   │   │── ad7614d508a5c116280d4c77de2c7f9a53e410
+│   │   │   └── cda2f5112a1cfd7ed3bfa260ace14ea5a1d4f6
+│   │   │── dd
+│   │   │   └── 9299ace2dfd3e0181d7115cd93d24833f94e1a
+│   │   │── de
+│   │   │   │── 3c9b45bbdab20bfaed607156a6a4695d5c8c20
+│   │   │   └── e3566cbfd67bd878d4f5129ee3f909089d963a
+│   │   │── df
+│   │   │   └── 4accaef6075aa6f2653f5aaa9e582945163b35
+│   │   │── e0
+│   │   │   │── 0e65750694d086729e3854164e63ad3d9ca596
+│   │   │   └── 78d3684756ebd1c81955549289975ba176fa4d
+│   │   │── e1
+│   │   │   │── 2a85a5bf200f3dd263cd90374b4477cbf98f04
+│   │   │   │── 2d4aa97ac91a7c0a490f1ad846820b312d4709
+│   │   │   │── 7d2c82e03cb405784465d7a3ff8ea88eefc3af
+│   │   │   │── b261ae0847cfd224516838858cb8927880b526
+│   │   │   └── dfd025816406b75f94357a82c879bc6b251d4d
+│   │   │── e2
+│   │   │   │── 039bd4cb0d6cf5612d54752e20be5b02d16068
+│   │   │   │── 190100710f40342709a57342d5b3d78999e957
+│   │   │   └── e3d53af3d5640150f7fda4f5652b9c346f3dc8
+│   │   │── e4
+│   │   │   └── 5862d2f474e737aa0492ad85292eae86916d31
+│   │   │── e5
+│   │   │   └── 756500f1b83e42892e2a2aefb99abcd54eeffb
+│   │   │── e6
+│   │   │   │── 4774d13b6ed03242e9d912a29a581dce1f89fc
+│   │   │   │── 67979fbc82569b06a906ec3be7278e6bd118ee
+│   │   │   └── 9de29bb2d1d6434b8b29ae775ad8c2e48c5391
+│   │   │── e7
+│   │   │   └── 7d53ed438718d83684943f1556212c1f3e9c76
+│   │   │── e8
+│   │   │   │── 334445f24051373cd0d7e1a399f3cdf9108f25
+│   │   │   └── a3d74defe3c739fdbf91201823b7507a8df710
+│   │   │── e9
+│   │   │   └── 962484a8e667ec9d13aa2e34aa2d75ee5a708e
+│   │   │── ea
+│   │   │   │── 9b8d4dc465c7cd68ce04275b687fcbeef316eb
+│   │   │   └── b2f95255dab562b115e42912ab599b7754c97b
+│   │   │── eb
+│   │   │   │── 0ffe9b14d377c31d25573d441a147fededed4f
+│   │   │   │── 35c3e73f1451f259b2dfe8a72a5de95ad34e88
+│   │   │   └── 7e7f8f2221385202ee102fa2faa97defcd671e
+│   │   │── ec
+│   │   │   └── 2cc9ad7da88adc157771747e540199b7eaa487
+│   │   │── ed
+│   │   │   └── 9acfe2b2ffbffc7870b2e71c18d1d007dcb1e5
+│   │   │── ee
+│   │   │   │── c790a25c9466f64061b206ef48b065f8147c5c
+│   │   │   └── ff1209ee75399a54aac9999cff408ab4e234d8
+│   │   │── ef
+│   │   │   │── 407a1a5efce8e58494f34257ece8c52d72fc7a
+│   │   │   └── a5d7716b031b5828ee911ec2c3f26592034b8b
+│   │   │── f0
+│   │   │   │── 7b25320a96131e6c09b3e4228d03761e3fc99d
+│   │   │   └── d7dda44d60a7e35f50317f1b6bbcfc0d69160a
+│   │   │── f1
+│   │   │   │── 9b0084e1038a8164b2bc21ec30eb381a799c83
+│   │   │   └── f19431f15e769cc801e60739c9a90ffd738900
+│   │   │── f2
+│   │   │   │── ca6ec8f5ca866fd5b6623a05cd898541d92117
+│   │   │   └── f894137a63dcee89326cee18bd953dc9245f88
+│   │   │── f3
+│   │   │   └── 9fb00b76699eaaefec9ca98198571a92215e76
+│   │   │── f4
+│   │   │   └── 672fa01aab4c685a6ff62b2396b966a9d4c361
+│   │   │── f5
+│   │   │   └── 8f80c7a5d9f8278ffad697161c331cba22ff85
+│   │   │── f6
+│   │   │   │── 2ff2a635f7b3ad252dab71a5be0f9fb4f51d93
+│   │   │   └── 622b7871fe3a79ed186106e233c7f40c264197
+│   │   │── f7
+│   │   │   │── 2c3d6a92e696604fa398d7270445d29e00b6d7
+│   │   │   └── cd42baf4512dcb6e178d21ea853281721c7b11
+│   │   │── f9
+│   │   │   │── 748256bc1a3b39db70437b2311d59c918317df
+│   │   │   └── e3c443b9055bd89121379ca8b18aca77a89877
+│   │   │── fa
+│   │   │   │── 4c216d5a1527d9a38d507097698767085fed53
+│   │   │   └── a5087a1c7be9127545f1877fc2a807bda57987
+│   │   │── fb
+│   │   │   └── 71054fb934a595d86b6676035832247ca495b6
+│   │   │── fc
+│   │   │   └── 37aa1ce3193d9f9002ebc52059069e5dae5ec9
+│   │   │── fd
+│   │   │   │── 2731519f32d5a768263c2f85de004b64ce90d3
+│   │   │   │── 7a652d6962a13b21d1fbd0896a233ee6f9d960
+│   │   │   └── a0b34c357b7d86a41902ff6aa965369952547f
+│   │   │── fe
+│   │   │   └── 8ed41c1b5f41e511ceaa31de0c574c4f99c2a0
+│   │   │── ff
+│   │   │   └── 1de556bd583a0b24bce09d4020a12bfdd18c57
+│   │   │── info
+│   │   └── pack
+│   └── refs
+│       │── heads
+│       │   └── main
+│       │── remotes
+│       │   └── origin
+│       │       └── main
+│       └── tags
+│── demo
+│   │── manuais
+│   │   │── Manual_Tecnico.md
+│   │   └── Manual_Utilizador.md
+│   │── pom.xml
+│   │── src
+│   │   │── main
+│   │   │   └── java
+│   │   │       └── com
+│   │   │           └── example
+│   │   │               │── App.java
+│   │   │               │── controller
+│   │   │               │   │── GaragemController.java
+│   │   │               │   │── LoopController.java
+│   │   │               │   └── Navegacao.java
+│   │   │               │── fabrica
+│   │   │               │   │── BarcoFactory.java
+│   │   │               │   │── CarroFactory.java
+│   │   │               │   │── MotaFactory.java
+│   │   │               │   └── VeiculoFactory.java
+│   │   │               │── facade
+│   │   │               │   └── GaragemFacade.java
+│   │   │               │── garagem
+│   │   │               │   │── Garagem.java
+│   │   │               │   │── GrupoVeiculos.java
+│   │   │               │   └── IteradorGaragem.java
+│   │   │               │── loop
+│   │   │               │   │── ConjuntoRodas.java
+│   │   │               │   │── GaragemLoop.java
+│   │   │               │   │── ListaCircular.java
+│   │   │               │   │── No.java
+│   │   │               │   │── PosicaoRoda.java
+│   │   │               │   │── Roda.java
+│   │   │               │   └── Sentido.java
+│   │   │               │── Main.java
+│   │   │               │── matricula
+│   │   │               │   │── EstrategiaMatricula.java
+│   │   │               │   │── Matricula.java
+│   │   │               │   │── MatriculaMaritima.java
+│   │   │               │   └── MatriculaTerrestre.java
+│   │   │               │── veiculo
+│   │   │               │   │── Barco.java
+│   │   │               │   │── Carro.java
+│   │   │               │   │── ElementoGaragem.java
+│   │   │               │   │── Mota.java
+│   │   │               │   │── TipoVeiculo.java
+│   │   │               │   └── Veiculo.java
+│   │   │               └── view
+│   │   │                   │── CenaGaragemView.java
+│   │   │                   │── CenaLoopView.java
+│   │   │                   └── componentes
+│   │   │                       │── BotaoVisual.java
+│   │   │                       │── CampoRotulado.java
+│   │   │                       │── FormularioVeiculo.java
+│   │   │                       │── ListaVeiculosView.java
+│   │   │                       │── PainelLoop.java
+│   │   │                       │── RodaView.java
+│   │   │                       └── VagaView.java
+│   │   └── test
+│   │       └── java
+│   │           └── com
+│   │               └── example
+│   │                   │── fabrica
+│   │                   │   └── VeiculoFactoryTest.java
+│   │                   │── facade
+│   │                   │   └── GaragemFacadeTest.java
+│   │                   │── garagem
+│   │                   │   └── GaragemTest.java
+│   │                   │── loop
+│   │                   │   │── ConjuntoRodasTest.java
+│   │                   │   │── GaragemLoopTest.java
+│   │                   │   └── ListaCircularTest.java
+│   │                   └── matricula
+│   │                       │── MatriculaMaritimaTest.java
+│   │                       └── MatriculaTerrestreTest.java
+│   └── target
+│       │── classes
+│       │   └── com
+│       │       └── example
+│       │           │── App.class
+│       │           │── controller
+│       │           │   │── GaragemController.class
+│       │           │   │── LoopController.class
+│       │           │   └── Navegacao.class
+│       │           │── fabrica
+│       │           │   │── BarcoFactory.class
+│       │           │   │── CarroFactory.class
+│       │           │   │── MotaFactory.class
+│       │           │   └── VeiculoFactory.class
+│       │           │── facade
+│       │           │   └── GaragemFacade.class
+│       │           │── garagem
+│       │           │   │── Garagem.class
+│       │           │   │── GrupoVeiculos.class
+│       │           │   └── IteradorGaragem.class
+│       │           │── loop
+│       │           │   │── ConjuntoRodas$Troca.class
+│       │           │   │── ConjuntoRodas.class
+│       │           │   │── GaragemLoop$Passo.class
+│       │           │   │── GaragemLoop.class
+│       │           │   │── ListaCircular.class
+│       │           │   │── No.class
+│       │           │   │── PosicaoRoda.class
+│       │           │   │── Roda.class
+│       │           │   └── Sentido.class
+│       │           │── Main.class
+│       │           │── matricula
+│       │           │   │── EstrategiaMatricula.class
+│       │           │   │── Matricula.class
+│       │           │   │── MatriculaMaritima.class
+│       │           │   └── MatriculaTerrestre.class
+│       │           │── veiculo
+│       │           │   │── Barco.class
+│       │           │   │── Carro.class
+│       │           │   │── ElementoGaragem.class
+│       │           │   │── Mota.class
+│       │           │   │── TipoVeiculo.class
+│       │           │   └── Veiculo.class
+│       │           └── view
+│       │               │── CenaGaragemView.class
+│       │               │── CenaLoopView.class
+│       │               └── componentes
+│       │                   │── BotaoVisual$Estilo.class
+│       │                   │── BotaoVisual.class
+│       │                   │── CampoRotulado.class
+│       │                   │── FormularioVeiculo$1.class
+│       │                   │── FormularioVeiculo$2.class
+│       │                   │── FormularioVeiculo.class
+│       │                   │── ListaVeiculosView$1.class
+│       │                   │── ListaVeiculosView.class
+│       │                   │── PainelLoop.class
+│       │                   │── RodaView.class
+│       │                   └── VagaView.class
+│       │── generated-sources
+│       │   └── annotations
+│       │── generated-test-sources
+│       │   └── test-annotations
+│       │── maven-status
+│       │   └── maven-compiler-plugin
+│       │       │── compile
+│       │       │   └── default-compile
+│       │       │       │── createdFiles.lst
+│       │       │       └── inputFiles.lst
+│       │       └── testCompile
+│       │           └── default-testCompile
+│       │               │── createdFiles.lst
+│       │               └── inputFiles.lst
+│       │── surefire-reports
+│       │   │── com.example.fabrica.VeiculoFactoryTest.txt
+│       │   │── com.example.facade.GaragemFacadeTest.txt
+│       │   │── com.example.garagem.GaragemTest.txt
+│       │   │── com.example.loop.ConjuntoRodasTest.txt
+│       │   │── com.example.loop.GaragemLoopTest.txt
+│       │   │── com.example.loop.ListaCircularTest.txt
+│       │   │── com.example.matricula.MatriculaMaritimaTest.txt
+│       │   │── com.example.matricula.MatriculaTerrestreTest.txt
+│       │   │── TEST-com.example.fabrica.VeiculoFactoryTest.xml
+│       │   │── TEST-com.example.facade.GaragemFacadeTest.xml
+│       │   │── TEST-com.example.garagem.GaragemTest.xml
+│       │   │── TEST-com.example.loop.ConjuntoRodasTest.xml
+│       │   │── TEST-com.example.loop.GaragemLoopTest.xml
+│       │   │── TEST-com.example.loop.ListaCircularTest.xml
+│       │   │── TEST-com.example.matricula.MatriculaMaritimaTest.xml
+│       │   └── TEST-com.example.matricula.MatriculaTerrestreTest.xml
+│       └── test-classes
+│           └── com
+│               └── example
+│                   │── fabrica
+│                   │   └── VeiculoFactoryTest.class
+│                   │── facade
+│                   │   └── GaragemFacadeTest.class
+│                   │── garagem
+│                   │   └── GaragemTest.class
+│                   │── loop
+│                   │   │── ConjuntoRodasTest.class
+│                   │   │── GaragemLoopTest.class
+│                   │   └── ListaCircularTest.class
+│                   └── matricula
+│                       │── MatriculaMaritimaTest.class
+│                       └── MatriculaTerrestreTest.class
+└── README.md
