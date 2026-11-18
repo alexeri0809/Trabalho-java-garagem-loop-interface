@@ -101,7 +101,9 @@ São **três rodas lado a lado**, ligadas entre si: **esquerda**, **central** e 
 | Central | horário ↻ | anti-horário |
 | Direita | anti-horário ↺ | horário |
 
-**Fim de cada volta:** em cada roda, quando o `Vazio` completa uma volta, o **contador dessa roda** sobe uma volta, o veículo **mais antigo dessa roda** sai e entra um veículo **novo do mesmo tipo** (mesma marca e modelo) com **matrícula nova**. A mensagem por baixo mostra `Saiu` e `Entrou` (uma linha por cada roda que completou a volta). Os veículos nunca passam de uma roda para outra: a combinação de cada roda mantém-se. Uma roda sem veículos fica parada.
+**Fim de cada volta:** em cada roda, quando o `Vazio` completa uma volta, o **contador dessa roda** sobe uma volta, o veículo **mais antigo dessa roda** sai e entra um veículo **novo do mesmo tipo** (mesma marca e modelo) com **matrícula nova**. A mensagem por baixo mostra `Saiu` e `Entrou` (uma linha por cada roda que completou a volta). Uma roda sem veículos fica parada.
+
+**Troca entre rodas:** quando as **três rodas estão cheias** (4 veículos cada), no fim de volta da roda central o veículo mais antigo da roda da **esquerda** passa para a roda do meio e é substituído pelo mais antigo do meio; a seguir faz-se o mesmo com a roda da **direita**. A mensagem mostra uma linha `Troca: ...` por cada troca. Se alguma roda não estiver cheia, não há trocas e cada roda mantém os seus veículos.
 
 | Botão | O que faz |
 |---|---|

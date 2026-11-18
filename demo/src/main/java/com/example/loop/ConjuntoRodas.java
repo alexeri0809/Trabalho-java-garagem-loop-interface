@@ -48,6 +48,39 @@ public class ConjuntoRodas {
         return passos;
     }
 
+    /**
+     * Uma troca entre uma roda lateral e a central: o veículo da lateral passou para a vaga
+     * do veículo do centro, e o do centro passou para a vaga do da lateral.
+     */
+    public record Troca(PosicaoRoda lateral, Veiculo daLateral, Veiculo doCentro) {
+    }
+
+    /**
+     * Se as três rodas estiverem cheias, troca o veículo mais antigo da roda da esquerda com o mais
+     * antigo da central e, a seguir, o mais antigo da direita com o mais antigo que ficou na central.
+     * Cada veículo ocupa a vaga exata do que substitui. Não faz nada se alguma roda não estiver cheia.
+     *
+     * @return as trocas feitas (2), ou uma lista vazia se não houve troca
+     */
+    public List<Troca> trocarSeCheio() {
+        for (PosicaoRoda posicao : PosicaoRoda.values()) {
+            if (rodas.get(posicao).contarVeiculos() < GaragemLoop.VAGAS - 1) {
+                return List.of();
+            }
+        }
+        return List.of(trocarComCentral(PosicaoRoda.ESQUERDA), trocarComCentral(PosicaoRoda.DIREITA));
+    }
+
+    private Troca trocarComCentral(PosicaoRoda lateral) {
+        Roda central = rodas.get(PosicaoRoda.CENTRAL);
+        Roda roda = rodas.get(lateral);
+        Veiculo daLateral = roda.maisAntigo();
+        Veiculo doCentro = central.maisAntigo();
+        roda.substituir(daLateral, doCentro);
+        central.substituir(doCentro, daLateral);
+        return new Troca(lateral, daLateral, doCentro);
+    }
+
     public Roda getRoda(PosicaoRoda posicao) {
         return rodas.get(posicao);
     }

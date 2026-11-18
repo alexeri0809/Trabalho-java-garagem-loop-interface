@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.facade.GaragemFacade;
+import com.example.loop.ConjuntoRodas;
 import com.example.loop.GaragemLoop;
 import com.example.loop.PosicaoRoda;
 import com.example.veiculo.Veiculo;
@@ -87,6 +88,10 @@ public class LoopController {
                 fimsDeVolta.add(roda.getNome() + ", volta " + numero + "   |   Saiu: "
                         + descrever(passo.veiculoQueSaiu) + "   |   Entrou: " + descrever(passo.veiculoQueEntrou));
             }
+        }
+        for (ConjuntoRodas.Troca troca : modelo.getUltimasTrocas()) {
+            fimsDeVolta.add("Troca: " + troca.lateral().getNome() + " ↔ Roda central   |   "
+                    + descrever(troca.daLateral()) + " ↔ " + descrever(troca.doCentro()));
         }
         if (!fimsDeVolta.isEmpty()) {
             vista.mostrarMensagem(String.join("\n", fimsDeVolta));

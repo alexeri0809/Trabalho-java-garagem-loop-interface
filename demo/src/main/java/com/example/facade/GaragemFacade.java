@@ -28,6 +28,7 @@ public class GaragemFacade {
     private final Map<PosicaoRoda, Garagem> garagens = new EnumMap<>(PosicaoRoda.class);
     private final Map<TipoVeiculo, VeiculoFactory> fabricas = new EnumMap<>(TipoVeiculo.class);
     private ConjuntoRodas rodas;
+    private List<ConjuntoRodas.Troca> ultimasTrocas = List.of();
 
     public GaragemFacade() {
         fabricas.put(TipoVeiculo.CARRO, new CarroFactory());
@@ -179,7 +180,25 @@ public class GaragemFacade {
                 garagem.adicionarVeiculo(passo.veiculoQueEntrou);
             }
         }
+        // Com as três rodas cheias, no fim de volta da central há troca entre as rodas
+        ultimasTrocas = List.of();
+        if (passos.get(PosicaoRoda.CENTRAL).voltaCompleta) {
+            ultimasTrocas = rodas.trocarSeCheio();
+            Garagem centro = garagens.get(PosicaoRoda.CENTRAL);
+            for (ConjuntoRodas.Troca troca : ultimasTrocas) {
+                Garagem lateral = garagens.get(troca.lateral());
+                lateral.removerVeiculo(troca.daLateral());
+                centro.removerVeiculo(troca.doCentro());
+                lateral.adicionarVeiculo(troca.doCentro());
+                centro.adicionarVeiculo(troca.daLateral());
+            }
+        }
         return passos;
+    }
+
+    /** @return as trocas entre rodas feitas no último passo (lista vazia se não houve nenhuma) */
+    public List<ConjuntoRodas.Troca> getUltimasTrocas() {
+        return ultimasTrocas;
     }
 
     /**

@@ -124,6 +124,42 @@ class ConjuntoRodasTest {
     }
 
     @Test
+    void semAsTresRodasCheiasNaoHaTroca() {
+        ConjuntoRodas conjunto = new ConjuntoRodas(comVeiculosEmTodas(), fabricas());
+
+        assertTrue(conjunto.trocarSeCheio().isEmpty());
+    }
+
+    @Test
+    void comAsTresRodasCheiasTrocaOMaisAntigoDaEsquerdaEDepoisDaDireitaComOCentro() {
+        List<Veiculo> esq = List.of(new Carro("L1", "x"), new Carro("L2", "x"), new Mota("L3", "x"), new Barco("L4", "x"));
+        List<Veiculo> cen = List.of(new Carro("C1", "x"), new Mota("C2", "x"), new Mota("C3", "x"), new Barco("C4", "x"));
+        List<Veiculo> dir = List.of(new Barco("R1", "x"), new Carro("R2", "x"), new Mota("R3", "x"), new Barco("R4", "x"));
+        Map<PosicaoRoda, List<Veiculo>> veiculos = new EnumMap<>(PosicaoRoda.class);
+        veiculos.put(PosicaoRoda.ESQUERDA, esq);
+        veiculos.put(PosicaoRoda.CENTRAL, cen);
+        veiculos.put(PosicaoRoda.DIREITA, dir);
+        ConjuntoRodas conjunto = new ConjuntoRodas(veiculos, fabricas());
+
+        List<ConjuntoRodas.Troca> trocas = conjunto.trocarSeCheio();
+
+        assertEquals(2, trocas.size());
+        // 1.ª troca: o mais antigo da esquerda (L1) com o mais antigo do centro (C1)
+        assertEquals(new ConjuntoRodas.Troca(PosicaoRoda.ESQUERDA, esq.get(0), cen.get(0)), trocas.get(0));
+        // 2.ª troca: o mais antigo que ficou no centro é L1 (id menor que C2, C3, C4); troca com o R1 da direita
+        assertEquals(new ConjuntoRodas.Troca(PosicaoRoda.DIREITA, dir.get(0), esq.get(0)), trocas.get(1));
+
+        // Cada veículo ficou na vaga exata do que substituiu (L1 estava na vaga 0 da esquerda)
+        assertEquals(cen.get(0), conjunto.getVagas(PosicaoRoda.ESQUERDA).get(0));
+        assertEquals(dir.get(0), conjunto.getVagas(PosicaoRoda.CENTRAL).get(0));
+        assertEquals(esq.get(0), conjunto.getVagas(PosicaoRoda.DIREITA).get(0));
+        for (PosicaoRoda posicao : PosicaoRoda.values()) {
+            assertEquals(1, vazios(conjunto.getVagas(posicao)));
+            assertEquals(4, conjunto.getRoda(posicao).contarVeiculos());
+        }
+    }
+
+    @Test
     void ofimDeVoltaTrocaOMaisAntigoDaPropriaRodaPorUmDoMesmoTipo() {
         Veiculo carro = new Carro("Toyota", "Corolla");
         Veiculo mota = new Mota("Yamaha", "MT-07");

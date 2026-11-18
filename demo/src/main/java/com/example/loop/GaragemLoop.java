@@ -109,6 +109,16 @@ public class GaragemLoop {
         return sb.toString();
     }
 
+    /** @return o veículo mais antigo (o de menor id) desta roda */
+    public Veiculo maisAntigo() {
+        return vagas.maisAntigo();
+    }
+
+    /** Põe o veículo novo na vaga do antigo, sem mexer em mais nada. @return true se o antigo estava no loop */
+    public boolean substituir(Veiculo antigo, Veiculo novo) {
+        return vagas.substituir(antigo, novo);
+    }
+
     /** O resultado de um passo da rotação. */
     public static final class Passo {
         public final String estado;

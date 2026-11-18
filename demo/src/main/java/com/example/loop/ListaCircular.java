@@ -108,6 +108,27 @@ public class ListaCircular {
         return no == null ? null : no.getConteudo();
     }
 
+    /**
+     * Põe o veículo novo na vaga do veículo antigo (o antigo é procurado pela identidade do objeto).
+     * Os Vazios não são afetados.
+     *
+     * @return true se o veículo antigo estava na lista e foi substituído
+     */
+    public boolean substituir(Veiculo antigo, Veiculo novo) {
+        if (inicio == null || antigo == null || novo == null) {
+            return false;
+        }
+        No atual = inicio;
+        do {
+            if (atual.getConteudo() == antigo) {
+                atual.setConteudo(novo);
+                return true;
+            }
+            atual = atual.getNext();
+        } while (atual != inicio);
+        return false;
+    }
+
     private No encontrarMaisAntigo() {
         if (inicio == null) {
             return null;

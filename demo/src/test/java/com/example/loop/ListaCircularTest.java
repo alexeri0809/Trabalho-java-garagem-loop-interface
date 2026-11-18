@@ -108,6 +108,34 @@ class ListaCircularTest {
     }
 
     @Test
+    void substituirTrocaPorIdentidadeNaMesmaVagaEDeixaOsVazios() {
+        ListaCircular lista = new ListaCircular();
+        Veiculo a = new Carro("A", "A");
+        Veiculo b = new Mota("B", "B");
+        Veiculo novo = new Barco("C", "C");
+        lista.adicionarVeiculo(a);
+        lista.adicionarVazio();
+        lista.adicionarVeiculo(b);
+
+        assertTrue(lista.substituir(b, novo));
+        assertSame(a, lista.obter(0));
+        assertNull(lista.obter(1));
+        assertSame(novo, lista.obter(2));
+        assertEquals(1, lista.contarVazios());
+    }
+
+    @Test
+    void substituirDevolveFalseSeOVeiculoNaoEstaOuForNull() {
+        ListaCircular lista = new ListaCircular();
+        lista.adicionarVeiculo(new Carro("A", "A"));
+        lista.adicionarVazio();
+
+        assertEquals(false, lista.substituir(new Mota("B", "B"), new Barco("C", "C")));
+        assertEquals(false, lista.substituir(null, new Barco("C", "C")));
+        assertEquals(false, lista.substituir(lista.obter(0), null));
+    }
+
+    @Test
     void substituirMaisAntigoNaoAceitaNull() {
         assertThrows(IllegalArgumentException.class, () -> new ListaCircular().substituirMaisAntigo(null));
     }

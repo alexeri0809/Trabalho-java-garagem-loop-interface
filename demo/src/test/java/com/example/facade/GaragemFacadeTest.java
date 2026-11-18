@@ -5,7 +5,12 @@ import com.example.loop.PosicaoRoda;
 import com.example.veiculo.TipoVeiculo;
 import org.junit.jupiter.api.Test;
 
+import com.example.veiculo.Veiculo;
+
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -181,6 +186,48 @@ class GaragemFacadeTest {
         assertEquals(1, garagem.getVeiculos(PosicaoRoda.ESQUERDA).size());
         assertEquals(1, garagem.getVeiculos(PosicaoRoda.CENTRAL).size());
         assertEquals(3, garagem.getTotalVeiculos());
+    }
+
+    @Test
+    void comAsTresRodasCheiasHaTrocaNoFimDeVoltaDaCentralEAsGaragensAcompanham() {
+        GaragemFacade garagem = new GaragemFacade();
+        for (PosicaoRoda roda : PosicaoRoda.values()) {
+            for (int i = 0; i < 4; i++) {
+                garagem.adicionarVeiculo(roda, TipoVeiculo.CARRO, "M" + i, "X");
+            }
+        }
+        garagem.iniciarLoop();
+
+        Map<PosicaoRoda, GaragemLoop.Passo> passos;
+        do {
+            passos = garagem.avancarRodas();
+        } while (!passos.get(PosicaoRoda.CENTRAL).voltaCompleta);
+
+        assertEquals(2, garagem.getUltimasTrocas().size());
+        assertEquals(12, garagem.getTotalVeiculos());
+        for (PosicaoRoda roda : PosicaoRoda.values()) {
+            Set<Veiculo> naRoda = garagem.vagasLoop(roda).stream().filter(v -> v != null).collect(Collectors.toSet());
+            assertEquals(4, naRoda.size());
+            assertEquals(naRoda, new HashSet<>(garagem.getVeiculos(roda)));
+        }
+    }
+
+    @Test
+    void semAsTresRodasCheiasNaoHaTrocaNoFimDeVolta() {
+        GaragemFacade garagem = new GaragemFacade();
+        for (int i = 0; i < 4; i++) {
+            garagem.adicionarVeiculo(PosicaoRoda.CENTRAL, TipoVeiculo.CARRO, "M" + i, "X");
+        }
+        garagem.adicionarVeiculo(PosicaoRoda.ESQUERDA, TipoVeiculo.MOTA, "Y", "Y");
+        garagem.adicionarVeiculo(PosicaoRoda.DIREITA, TipoVeiculo.BARCO, "Z", "Z");
+        garagem.iniciarLoop();
+
+        Map<PosicaoRoda, GaragemLoop.Passo> passos;
+        do {
+            passos = garagem.avancarRodas();
+        } while (!passos.get(PosicaoRoda.CENTRAL).voltaCompleta);
+
+        assertTrue(garagem.getUltimasTrocas().isEmpty());
     }
 
     private static int contar(String texto, String procurado) {

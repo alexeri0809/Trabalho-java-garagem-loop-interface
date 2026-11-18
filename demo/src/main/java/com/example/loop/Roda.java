@@ -49,6 +49,21 @@ public class Roda {
         return loop.avancar();
     }
 
+    /** @return quantos veículos a roda tem */
+    public int contarVeiculos() {
+        return (int) getVagas().stream().filter(v -> v != null).count();
+    }
+
+    /** @return o veículo mais antigo da roda, ou null se a roda não tiver veículos */
+    public Veiculo maisAntigo() {
+        return loop == null ? null : loop.maisAntigo();
+    }
+
+    /** Põe o veículo novo na vaga do antigo. @return true se o antigo estava nesta roda */
+    public boolean substituir(Veiculo antigo, Veiculo novo) {
+        return loop != null && loop.substituir(antigo, novo);
+    }
+
     /** @return as 5 vagas pela ordem do círculo; null = Vazio (cópia, pode ser alterada à vontade) */
     public List<Veiculo> getVagas() {
         if (loop == null) {
