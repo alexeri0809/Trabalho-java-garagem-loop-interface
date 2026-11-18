@@ -2,7 +2,14 @@ package com.example.view.componentes;
 
 import com.example.loop.PosicaoRoda;
 import com.example.veiculo.Veiculo;
+import javafx.animation.Animation;
+import javafx.animation.Interpolator;
+import javafx.animation.RotateTransition;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
+import java.util.ArrayList;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -23,6 +30,7 @@ public class PainelLoop extends Pane {
     private static final double DESCIDA_DA_LIGACAO = 25;
 
     private final Map<PosicaoRoda, RodaView> rodas = new EnumMap<>(PosicaoRoda.class);
+    private final List<RotateTransition> engrenagens = new ArrayList<>();
 
     public PainelLoop(int numeroVagas) {
         double largura = 3 * RodaView.LARGURA + 2 * ESPACO_ENTRE_RODAS;
@@ -51,13 +59,40 @@ public class PainelLoop extends Pane {
             ligacao.setStroke(Color.web("#90a4ae"));
             ligacao.setStrokeWidth(6);
 
-            Circle eixo = new Circle((deX + ateX) / 2, y, 11);
-            eixo.setFill(Color.web("#78909c"));
+            Circle eixo = new Circle(16);
+            eixo.setFill(Color.web("#546e7a"));
             eixo.setStroke(Color.WHITE);
             eixo.setStrokeWidth(3);
+            // Engrenagem que roda; as duas rodam em sentidos contrários, como engrenagens ligadas
+            Label engrenagem = new Label("\u2699");
+            engrenagem.setStyle("-fx-font-size: 22px; -fx-text-fill: white;");
+            StackPane cubo = new StackPane(eixo, engrenagem);
+            cubo.setLayoutX((deX + ateX) / 2 - 16);
+            cubo.setLayoutY(y - 16);
+            RotateTransition giro = new RotateTransition(Duration.seconds(5), engrenagem);
+            giro.setByAngle(i == 0 ? 360 : -360);
+            giro.setCycleCount(Animation.INDEFINITE);
+            giro.setInterpolator(Interpolator.LINEAR);
+            engrenagens.add(giro);
 
-            getChildren().addAll(ligacao, eixo);
+            getChildren().addAll(ligacao, cubo);
         }
+    }
+
+    /** Liga ou desliga o giro das engrenagens (acompanha o Pausar/Retomar). */
+    public void setAGirar(boolean agirar) {
+        for (RotateTransition giro : engrenagens) {
+            if (agirar) {
+                giro.play();
+            } else {
+                giro.pause();
+            }
+        }
+    }
+
+    /** Faz brilhar o veículo na roda indicada. */
+    public void destacar(PosicaoRoda roda, Veiculo veiculo, Color cor) {
+        rodas.get(roda).destacar(veiculo, cor);
     }
 
     /** Mostra o estado das vagas de uma roda pela ordem do círculo (null = Vazio). */

@@ -31,7 +31,7 @@ public class FormularioVeiculo extends VBox {
         super(14);
         setPadding(new Insets(20));
         setPrefWidth(300);
-        setStyle("-fx-background-color: white; -fx-background-radius: 12;");
+        setStyle("-fx-background-color: white; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 12, 0.1, 0, 3);");
 
         Label titulo = new Label("Novo veículo");
         titulo.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #263238;");

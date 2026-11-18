@@ -24,7 +24,7 @@ public class ListaVeiculosView extends VBox {
         super(10);
         this.nome = nome;
         setPadding(new Insets(20));
-        setStyle("-fx-background-color: white; -fx-background-radius: 12;");
+        setStyle("-fx-background-color: white; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 12, 0.1, 0, 3);");
         titulo.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #263238;");
 
         lista.setPlaceholder(new Label("Ainda não há veículos nesta roda. Adiciona o primeiro à esquerda."));
@@ -34,8 +34,12 @@ public class ListaVeiculosView extends VBox {
                 super.updateItem(veiculo, vazio);
                 if (vazio || veiculo == null) {
                     setText(null);
+                    setStyle("");
                 } else {
-                    setText(veiculo.getTipo().getNome() + "   " + veiculo.getMatricula()
+                    setStyle("-fx-border-color: transparent transparent transparent "
+                            + VagaView.corClara(veiculo.getTipo()) + "; -fx-border-width: 0 0 0 5;"
+                            + "-fx-padding: 8 10 8 10; -fx-font-size: 13px;");
+                    setText(VagaView.icone(veiculo.getTipo()) + "  " + veiculo.getTipo().getNome() + "   " + veiculo.getMatricula()
                             + "   -   " + veiculo.getMarca() + " " + veiculo.getModelo());
                 }
             }

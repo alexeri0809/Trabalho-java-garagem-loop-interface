@@ -63,6 +63,7 @@ public class LoopController {
     /** Para o relógio. Chama-se ao sair desta janela. */
     public void parar() {
         relogio.stop();
+        vista.setEmPausa(true);
     }
 
     private void alternarPausa() {
@@ -85,11 +86,14 @@ public class LoopController {
                 int numero = voltas.get(roda) + 1;
                 voltas.put(roda, numero);
                 vista.mostrarVoltas(roda, numero);
+                vista.destacar(roda, passo.veiculoQueEntrou, false);
                 fimsDeVolta.add(roda.getNome() + ", volta " + numero + "   |   Saiu: "
                         + descrever(passo.veiculoQueSaiu) + "   |   Entrou: " + descrever(passo.veiculoQueEntrou));
             }
         }
         for (ConjuntoRodas.Troca troca : modelo.getUltimasTrocas()) {
+            vista.destacar(troca.lateral(), troca.doCentro(), true);
+            vista.destacar(PosicaoRoda.CENTRAL, troca.daLateral(), true);
             fimsDeVolta.add("Troca: " + troca.lateral().getNome() + " ↔ Roda central   |   "
                     + descrever(troca.daLateral()) + " ↔ " + descrever(troca.doCentro()));
         }

@@ -28,7 +28,7 @@ public class CenaGaragemView extends BorderPane {
     // ======================== TAMANHO E FUNDO DA JANELA: altera aqui ========================
     private static final double LARGURA_JANELA = 980;
     private static final double ALTURA_JANELA = 660;
-    private static final String COR_FUNDO = "#eceff1";
+    private static final String COR_FUNDO = "linear-gradient(to bottom right, #eceff1, #b0bec5)";
     // =========================================================================================
 
     private final FormularioVeiculo formulario = new FormularioVeiculo();
@@ -43,7 +43,7 @@ public class CenaGaragemView extends BorderPane {
         setStyle("-fx-background-color: " + COR_FUNDO + ";");
 
         Label titulo = new Label("Garagem");
-        titulo.setStyle("-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #263238;");
+        titulo.setStyle("-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: #1c313a;");
         Label subtitulo = new Label("Escolhe a roda e os veículos de cada uma, e depois põe as três a rodar no loop.");
         subtitulo.setStyle("-fx-text-fill: #607d8b;");
         VBox cabecalho = new VBox(2, titulo, subtitulo);

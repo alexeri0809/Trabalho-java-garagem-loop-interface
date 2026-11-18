@@ -30,12 +30,18 @@ public class BotaoVisual extends Button {
                 + "-fx-font-size: " + TAMANHO_LETRA + "px;"
                 + "-fx-font-weight: bold;"
                 + "-fx-background-radius: " + RAIO_CANTOS + ";"
-                + "-fx-padding: 8 18 8 18;";
+                + "-fx-padding: 9 20 9 20;"
+                + "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.30), 6, 0.1, 0, 2);";
         setStyle(base);
         setCursor(Cursor.HAND);
-        // Quando o rato passa por cima o botão fica um pouco mais claro
-        setOnMouseEntered(e -> setStyle(base + "-fx-opacity: 0.85;"));
-        setOnMouseExited(e -> setStyle(base));
+        // Rato por cima: mais claro. Rato carregado: o botão "afunda" um pouco.
+        setOnMouseEntered(e -> setStyle(base + "-fx-opacity: 0.88;"));
+        setOnMouseExited(e -> {
+            setStyle(base);
+            setTranslateY(0);
+        });
+        setOnMousePressed(e -> setTranslateY(1));
+        setOnMouseReleased(e -> setTranslateY(0));
     }
 
     private static String corDe(Estilo estilo) {
