@@ -5,6 +5,7 @@ import com.example.veiculo.Veiculo;
 import javafx.animation.FadeTransition;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -17,8 +18,8 @@ import javafx.util.Duration;
  */
 public class VagaView extends StackPane {
 
-    public static final double LARGURA = 100;
-    public static final double ALTURA = 58;
+    public static final double LARGURA = 120;
+    public static final double ALTURA = 70;
 
     // ===================== CORES DOS VEÍCULOS: altera aqui (cor clara -> cor escura do degradê) =====================
     private static final String CARRO_CLARO = "#1e88e5", CARRO_ESCURO = "#0d47a1";   // azul
@@ -30,6 +31,7 @@ public class VagaView extends StackPane {
     private static final String ESTILO_VAZIO = "-fx-background-color: rgba(255,255,255,0.55); -fx-background-radius: 12;"
             + "-fx-border-color: #90a4ae; -fx-border-width: 2; -fx-border-style: dashed; -fx-border-radius: 12;";
 
+    private final ImageView foto = new ImageView();
     private final Label linhaTipo = new Label();
     private final Label linhaMatricula = new Label();
     private final Label linhaModelo = new Label();
@@ -43,7 +45,7 @@ public class VagaView extends StackPane {
 
         linhaMatricula.setMaxWidth(LARGURA - 14);
         linhaModelo.setMaxWidth(LARGURA - 8);
-        VBox texto = new VBox(1, linhaTipo, linhaMatricula, linhaModelo);
+        VBox texto = new VBox(1, foto, linhaTipo, linhaMatricula, linhaModelo);
         texto.setAlignment(Pos.CENTER);
         getChildren().add(texto);
 
@@ -93,6 +95,11 @@ public class VagaView extends StackPane {
         ultimo = veiculo;
         if (veiculo == null) {
             setStyle(ESTILO_VAZIO);
+            foto.setImage(null);
+            foto.setVisible(false);
+            foto.setManaged(false);
+            linhaTipo.setVisible(true);
+            linhaTipo.setManaged(true);
             linhaTipo.setText("Vazio");
             linhaTipo.setStyle("-fx-text-fill: #78909c; -fx-font-size: 13px; -fx-font-weight: bold;");
             linhaMatricula.setText("");
@@ -102,6 +109,16 @@ public class VagaView extends StackPane {
         }
         setStyle("-fx-background-color: linear-gradient(to bottom, " + corClara(veiculo.getTipo()) + ", "
                 + corEscura(veiculo.getTipo()) + "); -fx-background-radius: 12; " + SOMBRA);
+        // Com foto: mostra a foto em cima; sem foto: mostra o ícone e o tipo em texto
+        javafx.scene.image.Image imagem = ImagensVeiculo.de(veiculo);
+        foto.setImage(imagem);
+        foto.setFitWidth(60);
+        foto.setFitHeight(30);
+        foto.setPreserveRatio(true);
+        foto.setVisible(imagem != null);
+        foto.setManaged(imagem != null);
+        linhaTipo.setVisible(imagem == null);
+        linhaTipo.setManaged(imagem == null);
         linhaTipo.setText(icone(veiculo.getTipo()) + " " + veiculo.getTipo().getNome().toUpperCase());
         linhaTipo.setStyle("-fx-text-fill: white; -fx-font-size: 10px; -fx-font-weight: bold;");
         linhaMatricula.setText(veiculo.getMatricula());

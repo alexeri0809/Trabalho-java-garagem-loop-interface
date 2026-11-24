@@ -28,8 +28,8 @@ import java.util.List;
 public class CenaLoopView extends BorderPane {
 
     // ======================== TAMANHO E FUNDO DA JANELA: altera aqui ========================
-    private static final double LARGURA_JANELA = 1140;
-    private static final double ALTURA_JANELA = 660;
+    private static final double LARGURA_JANELA = 1240;
+    private static final double ALTURA_JANELA = 700;
     private static final String COR_FUNDO = "linear-gradient(to bottom right, #eceff1, #b0bec5)";
     // =========================================================================================
 

@@ -34,11 +34,13 @@ public class ListaVeiculosView extends VBox {
                 super.updateItem(veiculo, vazio);
                 if (vazio || veiculo == null) {
                     setText(null);
+                    setGraphic(null);
                     setStyle("");
                 } else {
                     setStyle("-fx-border-color: transparent transparent transparent "
                             + VagaView.corClara(veiculo.getTipo()) + "; -fx-border-width: 0 0 0 5;"
                             + "-fx-padding: 8 10 8 10; -fx-font-size: 13px;");
+                    setGraphic(ImagensVeiculo.vista(veiculo, 48, 24));
                     setText(VagaView.icone(veiculo.getTipo()) + "  " + veiculo.getTipo().getNome() + "   " + veiculo.getMatricula()
                             + "   -   " + veiculo.getMarca() + " " + veiculo.getModelo());
                 }

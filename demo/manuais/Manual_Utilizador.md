@@ -112,6 +112,10 @@ São **três rodas lado a lado**, ligadas entre si: **esquerda**, **central** e 
 
 ---
 
+## 5.1 Fotos dos veículos
+
+As fotos ficam na pasta `demo/src/main/resources/imagens` e chamam-se `carro1.png`, `carro2.png`, `carro3.png`, `barco1.png` ... `barco3.png`, `mota1.png` ... `mota3.png`. Vêm com imagens de exemplo (só o nome do ficheiro): para usar as tuas, **substitui cada ficheiro por uma foto com o mesmo nome** (de preferência PNG com fundo transparente, na proporção 2:1, por exemplo 280x140 px). Cada veículo usa sempre a mesma foto, escolhida pelo seu número, e a foto roda com ele nas rodas e aparece também nas listas da garagem. Para ter mais fotos por tipo, acrescenta `carro4.png`, `carro5.png`, etc. (com números seguidos): o programa conta sozinho as fotos que existem. Se um ficheiro não existir, a vaga mostra só o ícone e o texto. Depois de trocar as fotos, corre `mvn javafx:run` outra vez.
+
 ## 6. Alterar as cores e o aspeto
 
 - **Cores dos botões:** ficheiro `src/main/java/com/example/view/componentes/BotaoVisual.java`, linhas **13 a 18** (verde principal, cinza secundário, vermelho de remover, cor da letra, cantos redondos e tamanho da letra).

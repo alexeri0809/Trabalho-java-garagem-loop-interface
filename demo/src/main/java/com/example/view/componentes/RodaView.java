@@ -27,12 +27,12 @@ import java.util.List;
  */
 public class RodaView extends Pane {
 
-    public static final double LARGURA = 310;
-    public static final double ALTURA = 300;
+    public static final double LARGURA = 340;
+    public static final double ALTURA = 340;
     public static final double CENTRO_X = LARGURA / 2;
-    public static final double CENTRO_Y = 140;
-    public static final double RAIO_X = 104;
-    public static final double RAIO_Y = 110;
+    public static final double CENTRO_Y = 160;
+    public static final double RAIO_X = 118;
+    public static final double RAIO_Y = 118;
 
     private final List<VagaView> vagas = new ArrayList<>();
     private final Label contadorVoltas = new Label("Volta 0");
